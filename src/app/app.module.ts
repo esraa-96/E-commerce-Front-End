@@ -8,7 +8,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import{RouterModule, Routes} from '@angular/router'
 import { ProductsListComponent } from './Components/products-list/products-list.component';
 import { ProductComponent } from './Components/product/product.component';
-
+import { OrderComponent } from './components/order/order.component';
+import { OrderListComponent } from './components/order-list/order-list.component';
 
 const routes:Routes=[
   {path:""},
@@ -16,12 +17,15 @@ const routes:Routes=[
   {path:"admin/product",component:ProductComponent},
 ]
 
+
 @NgModule({
   declarations: [
     AppComponent,
     CreateProductComponent,
     EditProductComponent,
-    ProductComponent
+    ProductComponent,
+    OrderComponent,
+    OrderListComponent
   ],
   imports: [
     BrowserModule,
