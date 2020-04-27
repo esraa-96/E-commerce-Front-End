@@ -1,12 +1,13 @@
-<!-- Default form contact -->
-<form class="text-center border border-light p-5" action="#!">
+<div class="col-8 offset-2">
+<!--  form  -->
+<form class="text-center p-5" action="#!">
 
-    <p class="h4 mb-4">Create New Product</p>
+    <p class="h4 mb-4" id="title"> Create New Product</p>
 
     <!-- Name -->
     <input type="text" id="ProductTitle" class="form-control mb-4" placeholder="Product title">
 
-    <!-- Email -->
+    <!-- Price -->
     <input type="number" id="Price" class="form-control mb-4" placeholder="Price" min="1">
 
     <!-- Subject -->
@@ -20,12 +21,10 @@
 
 
     <!--image-->
-    <div class="file-field">
-        <div class="btn btn-primary btn-sm">
-          <span>Choose files</span>
-          <input type="file" multiple>
-        </div>
-      </div>
+    <div class="custom-file mb-4 ">
+      <input type="file" class="custom-file-input" id="customFile">
+      <label class="custom-file-label" for="customFile">Choose file</label>
+    </div>
 
     <!-- Message -->
     <div class="form-group">
@@ -34,7 +33,7 @@
 
 
     <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit">Create</button>
+    <button class="btn btn-info btn-block" type="submit" id="Create">Create</button>
 
 </form>
-<!-- Default form contact -->
+</div>

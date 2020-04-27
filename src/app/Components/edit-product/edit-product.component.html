@@ -1,0 +1,91 @@
+<div class="col-lg-5 col-md-6 col-11 offset-1">
+  <!--  form  -->
+  <form class="text-center p-5" action="#!">
+
+    <p class="h4 mb-4" id="title"> Edit  Product</p>
+
+    <!-- Name -->
+    <input type="text" id="ProductTitle" class="form-control mb-4" placeholder="Product title">
+
+    <!-- Price -->
+    <input type="number" id="Price" class="form-control mb-4" placeholder="Price" min="1">
+
+    <!-- Subject -->
+    <label>Catagory</label>
+    <select class="browser-default custom-select mb-4">
+      <option value="" disabled>Choose option</option>
+      <option value="1" selected>Male</option>
+      <option value="2">female</option>
+
+    </select>
+
+
+    <!--image-->
+    <div class="custom-file mb-4 ">
+      <input type="file" class="custom-file-input" id="customFile">
+      <label class="custom-file-label" for="customFile">Add Image</label>
+    </div>
+
+    <!-- Message -->
+    <div class="form-group">
+      <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"></textarea>
+    </div>
+
+
+    <!-- Send button -->
+    <button class="btn btn-info btn-block" type="submit" id="Create">Edit</button>
+
+  </form>
+</div>
+<!--galary-->
+<div class="col-11 col-md-5 p-5 offset-md-0 offset-1">
+  <p class="h4 mb-4" id="title">Product Images</p>
+
+  <div id="mdb-lightbox-ui"></div>
+
+  <div class="mdb-lightbox no-margin row">
+
+    <figure class="col-lg-6 col-md-11 ">
+      <i class="far fa-trash-alt"></i>
+       
+      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
+        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+          class="img-fluid">
+        
+      </a>
+      <input type="button" class="btn btn-danger m-2" value="Delete"> 
+    </figure>
+
+    <figure class="col-lg-6 col-md-11">
+    
+      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
+        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+          class="img-fluid" />
+      </a>
+      <input type="button" class="btn btn-danger m-2" value="Delete"> 
+    </figure>
+
+    <figure class="col-lg-6 col-md-11 ">
+      <i class="far fa-trash-alt"></i>
+       
+      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
+        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+          class="img-fluid">
+        
+      </a>
+      <input type="button" class="btn btn-danger m-2" value="Delete"> 
+    </figure>
+
+    <figure class="col-lg-6 col-md-11">
+    
+      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
+        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+          class="img-fluid" />
+      </a>
+      <input type="button" class="btn btn-danger m-2" value="Delete"> 
+    </figure>
+
+
+  </div>
+
+</div>
