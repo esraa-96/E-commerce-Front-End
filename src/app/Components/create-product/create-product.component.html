@@ -1,0 +1,40 @@
+<!-- Default form contact -->
+<form class="text-center border border-light p-5" action="#!">
+
+    <p class="h4 mb-4">Create New Product</p>
+
+    <!-- Name -->
+    <input type="text" id="ProductTitle" class="form-control mb-4" placeholder="Product title">
+
+    <!-- Email -->
+    <input type="number" id="Price" class="form-control mb-4" placeholder="Price" min="1">
+
+    <!-- Subject -->
+    <label>Catagory</label>
+    <select class="browser-default custom-select mb-4">
+        <option value="" disabled>Choose option</option>
+        <option value="1" selected>Male</option>
+        <option value="2">female</option>
+ 
+    </select>
+
+
+    <!--image-->
+    <div class="file-field">
+        <div class="btn btn-primary btn-sm">
+          <span>Choose files</span>
+          <input type="file" multiple>
+        </div>
+      </div>
+
+    <!-- Message -->
+    <div class="form-group">
+        <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"></textarea>
+    </div>
+
+
+    <!-- Send button -->
+    <button class="btn btn-info btn-block" type="submit">Create</button>
+
+</form>
+<!-- Default form contact -->
