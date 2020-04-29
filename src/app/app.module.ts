@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule, Routes } from '@angular/router'
-import { createComponent } from '@angular/compiler/src/core';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
+import { AppComponent } from './app.component';
 
 import { CreateProductComponent } from './Components/create-product/create-product.component';
 import { EditProductComponent } from './Components/edit-product/edit-product.component';
@@ -11,6 +11,8 @@ import { ProductsListComponent } from './Components/products-list/products-list.
 import { ProductComponent } from './Components/product/product.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
+
+import { OrderService } from './services/order.service'
 
 const routes: Routes = [
 
@@ -34,9 +36,12 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     NgbModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
