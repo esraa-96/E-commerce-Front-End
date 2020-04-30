@@ -1,12 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { RouterModule, Routes } from '@angular/router'
-
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http'
+import { AppComponent } from './app.component';
 
 import { CreateProductComponent } from './Components/create-product/create-product.component';
 import { EditProductComponent } from './Components/edit-product/edit-product.component';
@@ -16,6 +15,10 @@ import { OrderComponent } from './components/order/order.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+
+import { httpInterceptorProviders } from './http-interceptors';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
 
@@ -41,9 +44,14 @@ const routes: Routes = [
     NgbModule,
     RouterModule.forRoot(routes),ToastrModule.forRoot(),
     ReactiveFormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [
+    httpInterceptorProviders,
+    AuthService,
+    OrderService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
