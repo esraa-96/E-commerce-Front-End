@@ -1,39 +1,57 @@
-<div class="col-8 offset-2">
-<!--  form  -->
-<form class="text-center p-5" action="#!">
+<div class="col-12 col-md-8 col-lg-6 offset-lg-3 offset-md-2 bg-white mt-3 mb-3 rounded">
+    <!--  form  -->
+    <form class="text-center p-5" [formGroup]="createFrom" (submit)="Add()">
 
-    <p class="h4 mb-4" id="title"> Create New Product</p>
+        <p class="h4 mb-4" id="title"> Create New Product</p>
 
-    <!-- Name -->
-    <input type="text" id="ProductTitle" class="form-control mb-4" placeholder="Product title">
+        <!-- Name -->
+        <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid  Title</label>
+        <input type="text" formControlName="title" id="ProductTitle" class="form-control mb-4"
+            placeholder="Product title*">
 
-    <!-- Price -->
-    <input type="number" id="Price" class="form-control mb-4" placeholder="Price" min="1">
-
-    <!-- Subject -->
-    <label>Catagory</label>
-    <select class="browser-default custom-select mb-4">
-        <option value="" disabled>Choose option</option>
-        <option value="1" selected>Male</option>
-        <option value="2">female</option>
- 
-    </select>
+        <!-- Price -->
+        <label class="text-danger" *ngIf="price.touched && price.invalid">Please Enter Valid  price</label>
+        <input type="number" formControlName="price" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
 
 
-    <!--image-->
-    <div class="custom-file mb-4 ">
-      <input type="file" class="custom-file-input" id="customFile">
-      <label class="custom-file-label" for="customFile">Choose file</label>
-    </div>
+        <!-- quantity -->
+        <label class="text-danger" *ngIf="quantity.touched && quantity.invalid">Please Enter Valid quantity</label>
+        <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="quantity*"
+            min="0">
 
-    <!-- Message -->
-    <div class="form-group">
-        <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"></textarea>
-    </div>
+        <!-- Discount -->
+        <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="discount%"
+            min="0">
 
 
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit" id="Create">Create</button>
+        <!-- catagory -->
+        <div class="text-left row pr-3">
+            <label class="col-12 col-md-2" id="label">Catagory</label>
+            <select class="browser-default custom-select col-12 col-md-10 mb-4">
+                <option value="" disabled>Choose option</option>
+                <option value="1" selected>Male</option>
+                <option value="2">female</option>
 
-</form>
+            </select>
+        </div>
+
+
+        <!--image-->
+        <label class="text-danger" *ngIf="image.touched && image.invalid">Please Enter image(png - jpg or jpeg)</label>
+        <div class="custom-file mb-4 ">
+            <input type="file" class="custom-file-input" id="customFile" formControlName="image">
+            <label class="custom-file-label" for="customFile">{{uploadImage}}</label>
+        </div>
+
+        <!-- Message -->
+        <div class="form-group">
+            <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
+            <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"></textarea>
+        </div>
+
+
+        <!-- Send button -->
+        <button class="btn btn-info btn-block" type="submit" id="Create">Add</button>
+
+    </form>
 </div>

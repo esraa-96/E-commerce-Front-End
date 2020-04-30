@@ -1,91 +1,117 @@
-<div class="col-lg-5 col-md-6 col-11 offset-1">
-  <!--  form  -->
-  <form class="text-center p-5" action="#!">
+<div class="row">
+  <div class="col-lg-5 col-md-6 col-11 offset-1 bg-white mt-3 rounded">
+    <!--  form  -->
+    <form class="text-center p-5" [formGroup]="EditFrom" (submit)="Add()">
 
-    <p class="h4 mb-4" id="title"> Edit  Product</p>
+      <p class="h4 mb-4" id="title"> Create New Product</p>
 
-    <!-- Name -->
-    <input type="text" id="ProductTitle" class="form-control mb-4" placeholder="Product title">
+      <!-- Name -->
+      <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid  Title</label>
+      <input type="text" formControlName="title" id="ProductTitle" class="form-control mb-4"
+          placeholder="Product title*">
 
-    <!-- Price -->
-    <input type="number" id="Price" class="form-control mb-4" placeholder="Price" min="1">
-
-    <!-- Subject -->
-    <label>Catagory</label>
-    <select class="browser-default custom-select mb-4">
-      <option value="" disabled>Choose option</option>
-      <option value="1" selected>Male</option>
-      <option value="2">female</option>
-
-    </select>
+      <!-- Price -->
+      <label class="text-danger" *ngIf="price.touched && price.invalid">Please Enter Valid  price</label>
+      <input type="number" formControlName="price" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
 
 
-    <!--image-->
-    <div class="custom-file mb-4 ">
-      <input type="file" class="custom-file-input" id="customFile">
-      <label class="custom-file-label" for="customFile">Add Image</label>
-    </div>
+      <!-- quantity -->
+      <label class="text-danger" *ngIf="quantity.touched && quantity.invalid">Please Enter Valid quantity</label>
+      <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="quantity*"
+          min="0">
 
-    <!-- Message -->
-    <div class="form-group">
-      <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"></textarea>
-    </div>
+      <!-- Discount -->
+      <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="discount%"
+          min="0">
 
 
-    <!-- Send button -->
-    <button class="btn btn-info btn-block" type="submit" id="Create">Edit</button>
+      <!-- catagory -->
+      <div class="text-left row pr-3">
+          <label class="col-12 col-md-2" id="label">Catagory</label>
+          <select class="browser-default custom-select col-12 col-md-10 mb-4">
+              <option value="" disabled>Choose option</option>
+              <option value="1" selected>Male</option>
+              <option value="2">female</option>
+
+          </select>
+      </div>
+
+
+      <!--image-->
+      <label class="text-danger" *ngIf="image.touched && image.invalid">Please Enter image(png - jpg or jpeg)</label>
+      <div class="custom-file mb-4 ">
+          <input type="file" class="custom-file-input" id="customFile" formControlName="image">
+          <label class="custom-file-label" for="customFile">{{uploadImage}}</label>
+      </div>
+
+      <!-- Message -->
+      <div class="form-group">
+          <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
+          <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"
+          >{{description}}</textarea>
+      </div>
+
+
+      <!-- Send button -->
+      <button class="btn btn-info btn-block" type="submit" id="Create">Add</button>
 
   </form>
-</div>
-<!--galary-->
-<div class="col-11 col-md-5 p-5 offset-md-0 offset-1">
-  <p class="h4 mb-4" id="title">Product Images</p>
-
-  <div id="mdb-lightbox-ui"></div>
-
-  <div class="mdb-lightbox no-margin row">
-
-    <figure class="col-lg-6 col-md-11 ">
-      <i class="far fa-trash-alt"></i>
-       
-      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
-        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
-          class="img-fluid">
-        
-      </a>
-      <input type="button" class="btn btn-danger m-2" value="Delete"> 
-    </figure>
-
-    <figure class="col-lg-6 col-md-11">
-    
-      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
-        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
-          class="img-fluid" />
-      </a>
-      <input type="button" class="btn btn-danger m-2" value="Delete"> 
-    </figure>
-
-    <figure class="col-lg-6 col-md-11 ">
-      <i class="far fa-trash-alt"></i>
-       
-      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
-        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
-          class="img-fluid">
-        
-      </a>
-      <input type="button" class="btn btn-danger m-2" value="Delete"> 
-    </figure>
-
-    <figure class="col-lg-6 col-md-11">
-    
-      <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
-        <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
-          class="img-fluid" />
-      </a>
-      <input type="button" class="btn btn-danger m-2" value="Delete"> 
-    </figure>
 
 
   </div>
 
+
+  
+  <!--galary-->
+  <div class="col-11 col-md-5 p-5 offset-md-0 offset-1">
+    <p class="h4 mb-4" id="title">Product Images</p>
+
+    <div id="mdb-lightbox-ui"></div>
+
+    <div class="mdb-lightbox no-margin row">
+
+      <figure class="col-lg-6 col-md-11 ">
+        <i class="far fa-trash-alt"></i>
+
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
+          <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+            class="img-fluid">
+
+        </a>
+        <input type="button" class="btn btn-danger m-2" value="Delete">
+      </figure>
+
+      <figure class="col-lg-6 col-md-11">
+
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
+          <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+            class="img-fluid" />
+        </a>
+        <input type="button" class="btn btn-danger m-2" value="Delete">
+      </figure>
+
+      <figure class="col-lg-6 col-md-11 ">
+        <i class="far fa-trash-alt"></i>
+
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(117).jpg" data-size="1600x1067">
+          <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(117).jpg"
+            class="img-fluid">
+
+        </a>
+        <input type="button" class="btn btn-danger m-2" value="Delete">
+      </figure>
+
+      <figure class="col-lg-6 col-md-11">
+
+        <a href="https://mdbootstrap.com/img/Photos/Horizontal/Nature/12-col/img%20(98).jpg" data-size="1600x1067">
+          <img alt="picture" src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(98).jpg"
+            class="img-fluid" />
+        </a>
+        <input type="button" class="btn btn-danger m-2" value="Delete">
+      </figure>
+
+
+    </div>
+
+  </div>
 </div>
