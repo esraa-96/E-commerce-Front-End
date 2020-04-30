@@ -1,23 +1,8 @@
 <div>order-list works!</div>
 <div class="container">
     <div class="row row-cols-1">
-        <!-- <div class="col-12 col-md-6 col-lg-6 offset-lg-3"> -->
-        <!-- <div class="col-12 col-md-4 offset-md-2 col-lg-6 offset-lg-3"> -->
-
         <div class="col">
-            <app-order></app-order>
-        </div>
-        <div class="col">
-            <app-order></app-order>
-        </div>
-        <div class="col">
-            <app-order></app-order>
-        </div>
-        <div class="col">
-            <app-order></app-order>
-        </div>
-        <div class="col">
-            <app-order></app-order>
+            <app-order *ngFor="let eachorder of orderList" [order]="eachorder"></app-order>
         </div>
     </div>
 </div>

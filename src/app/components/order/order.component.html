@@ -1,57 +1,78 @@
 <div class="row bg-white mb-3 p-0 pt-2 border border-gray rounded">
 
+    <!-- <h1>{{order.orderId}}</h1> -->
     <!-- Header & Body -->
     <div class="col-12 col-lg-8">
-        <!-- Header (Name,Date,State) -->
+        <!-- Header (Name,Date,Status) -->
         <div class="mb-2">
 
-            <div class="h6 m-0">AhmedOsama</div>
-            <div class="pl-2 text-muted small font-italic">12 April 2020, 11:11:11</div>
+            <div class="h6 m-0">{{order.user.fullName.firstName}} {{order.user.fullName.lastName}}</div>
+            <div class="pl-2 text-muted small font-italic">{{order.date}}</div>
             <!-- <span class="h3 position-absolute text-success" style="top: 25px; right: 2rem;">&#10004;</span>
-            <span class="h3 position-absolute text-danger" style="top: 15px; right: 2rem;">&#10008;</span>
-            <span class="h3 position-absolute text-dark" style="top: 5px; right: 2rem;">⏱ 🕑 </span> -->
-
+                <span class="h3 position-absolute text-danger" style="top: 15px; right: 2rem;">&#10008;</span>
+                <span class="h3 position-absolute text-dark" style="top: 5px; right: 2rem;">⏱ 🕑 </span> -->
 
             <!-- Pending Icon -->
-            <svg class="bi bi-dash-circle text-secondary position-absolute" style="top: 0.3rem; right: 2rem;"
-                width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
-                    clip-rule="evenodd" />
-                <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z"
-                    clip-rule="evenodd" />
-            </svg>
-
+            <div *ngIf="order.status == 1">
+                <svg class="bi bi-dash-circle text-secondary position-absolute" style="top: 0.3rem; right: 2rem;"
+                    width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <!-- Accepted Icon -->
+            <div *ngIf="order.status == 2">
+                <svg class="bi bi-check-circle text-success position-absolute" style="top: 0.3rem; right: 2rem;"
+                    width="2em" height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M15.354 2.646a.5.5 0 010 .708l-7 7a.5.5 0 01-.708 0l-3-3a.5.5 0 11.708-.708L8 9.293l6.646-6.647a.5.5 0 01.708 0z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                        d="M8 2.5A5.5 5.5 0 1013.5 8a.5.5 0 011 0 6.5 6.5 0 11-3.25-5.63.5.5 0 11-.5.865A5.472 5.472 0 008 2.5z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <!-- Rejected Icon -->
+            <div *ngIf="order.status == 3">
+                <svg class="bi bi-x-circle text-danger position-absolute" style="top: 0.3rem; right: 2rem;" width="2em"
+                    height="2em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M8 15A7 7 0 108 1a7 7 0 000 14zm0 1A8 8 0 108 0a8 8 0 000 16z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                        d="M11.854 4.146a.5.5 0 010 .708l-7 7a.5.5 0 01-.708-.708l7-7a.5.5 0 01.708 0z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd"
+                        d="M4.146 4.146a.5.5 0 000 .708l7 7a.5.5 0 00.708-.708l-7-7a.5.5 0 00-.708 0z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
         </div>
 
         <!-- Body (ItemsList) -->
         <div class="mb-2">
             <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Product 1 Title
-                    <span class="border badge-pill">14 [30]</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Product 2 Title
-                    <span class="badge badge-light badge-pill">2</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    Product 3 Title
-                    <span class="badge badge-primary badge-pill">1</span>
+                <li *ngFor="let item of order.orderDetails"
+                    class="list-group-item d-flex justify-content-between align-items-center">
+                    {{item.product.productName}}
+                    <span class="border badge-pill">{{item.numberOfItems}} [{{item.product.unitsInStock}}]</span>
                 </li>
             </ul>
         </div>
     </div>
     <!-- Footer (ActionButtons,TotalPrice) -->
-    <div class="col-12 col-lg-4 p-0 p-lg-3 mb-2">
+    <div *ngIf="order.status == 1" class="col-12 col-lg-4 p-0 p-lg-3 mb-2">
         <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
             <div class="h6 mb-0 d-inline-block">Total Price:</div>
-            <div class="h6 mb-0 d-inline-block">1452.00 LE</div>
+            <div class="h6 mb-0 d-inline-block">{{order.totalPrice}} LE</div>
         </div>
 
         <div class="col-12">
-            <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-success">Accept</button>
-            <button type="button" class="col-6 col-lg-12 btn btn-danger">Reject</button>
+            <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-outline-success"
+                (click)="acceptOrder(order.orderId)">Accept</button>
+            <button type="button" class="col-6 col-lg-12 btn btn-outline-danger"
+                (click)="rejectOrder(order.orderId)">Reject</button>
         </div>
     </div>
-
 </div>
