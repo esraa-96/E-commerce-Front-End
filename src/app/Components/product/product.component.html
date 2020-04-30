@@ -1,4 +1,4 @@
- <div class="card">
+ <!-- <div class="card">
         <img src="assets/def.jpg" class="card-img-top" alt="productImage">
         <div class="card-body">
             <h5 class="card-title">Product Name</h5>
@@ -19,6 +19,36 @@
             </table>
         </div>
 </div>
+
+
+ -->
+
+ <div class="card" *ngIf="prd.isDeleted==false">
+  <img src="assets/def.jpg" class="card-img-top" alt="productImage">
+  <div class="card-body">
+      <h5 class="card-title">{{prd.productName}}</h5>
+      <p class="card-text">{{prd.description}}</p>
+  </div>
+  <div class="card-footer" style="text-align: center;" >
+      <button class="btn btn-info col-4 mr-3 ml-1"> Edit </button>
+      <button class="btn btn-danger col-4 " (click)="delete(prd.productID)">Delete</button> <br> <br>
+      <table class="table">
+            <tr>
+              <th scope="col">Price</th>
+              <td scope="col">{{prd.unitPrice}}</td>
+            </tr>
+            <tr>
+              <th scope="row">Quantity</th>
+              <td>{{prd.unitsInStock}}</td>
+            </tr>
+            <tr *ngIf="prd.discount > 0">
+              <th scope="row">Discount</th>
+              <td>{{prd.discount*100}} %</td>
+            </tr>
+      </table>
+  </div>
+</div>
+
 
 
 

@@ -22,12 +22,12 @@ export class ProductService {
   }
   editProduct(id,product)
   {
-    return this.ProductClient.post(`${this.baseURL}`,product);
+    return this.ProductClient.post(`${this.baseURL}/${id}`,{body:product});
   }
 
   deleteProduct(id)
   {
-    return this.ProductClient.delete(`${this.baseURL}`);
+    return this.ProductClient.delete(`${this.baseURL}/${id}`);
   }
 
   getProductByName(name)

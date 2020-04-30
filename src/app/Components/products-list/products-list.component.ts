@@ -11,7 +11,7 @@ export class ProductsListComponent implements OnInit {
   constructor(private service:ProductService) { }
 
   ngOnInit(): void {
-   /* this.service.getAllProducts()
+    this.service.getAllProducts()
       .subscribe(
         (response) => {
           this.products = response;
@@ -20,20 +20,10 @@ export class ProductsListComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-        });*/
+        });
 
-        let prd ={
-          //"productID": 0,
-          "productName": "blalala",
-          "unitPrice": 0,
-          "unitsInStock": 0,
-          "discount": 0,
-          "category": 0,
-          "description": "strndndjndking",
-          "isDeleted": true
-
-        }
-        this.service.createProduct(prd)
+      
+        /*this.service.createProduct(prd)
         .subscribe(
           (response) => {
             //this.products = response;
@@ -43,7 +33,8 @@ export class ProductsListComponent implements OnInit {
           },
           (err) => {
             console.log(err);
-          });
+          });*/
+   
   }
 
   products;
