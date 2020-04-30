@@ -15,6 +15,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
+import {ProductService} from './services/product.service'
 
 const routes: Routes = [
 
@@ -44,7 +45,8 @@ const routes: Routes = [
   providers: [
     httpInterceptorProviders,
     AuthService,
-    OrderService
+    OrderService,
+    ProductService
   ],
   bootstrap: [AppComponent]
 })
