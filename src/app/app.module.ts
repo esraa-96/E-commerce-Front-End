@@ -12,7 +12,9 @@ import { ProductComponent } from './Components/product/product.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 
-import { OrderService } from './services/order.service'
+import { httpInterceptorProviders } from './http-interceptors';
+import { OrderService } from './services/order.service';
+import { AuthService } from './services/auth.service';
 
 const routes: Routes = [
 
@@ -40,6 +42,8 @@ const routes: Routes = [
     HttpClientModule
   ],
   providers: [
+    httpInterceptorProviders,
+    AuthService,
     OrderService
   ],
   bootstrap: [AppComponent]

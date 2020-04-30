@@ -6,7 +6,7 @@
         <!-- Header (Name,Date,Status) -->
         <div class="mb-2">
 
-            <div class="h6 m-0">{{order.userId}}</div>
+            <div class="h6 m-0">{{order.user.fullName.firstName}} {{order.user.fullName.lastName}}</div>
             <div class="pl-2 text-muted small font-italic">{{order.date}}</div>
             <!-- <span class="h3 position-absolute text-success" style="top: 25px; right: 2rem;">&#10004;</span>
                 <span class="h3 position-absolute text-danger" style="top: 15px; right: 2rem;">&#10008;</span>
@@ -69,8 +69,10 @@
         </div>
 
         <div class="col-12">
-            <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-outline-success">Accept</button>
-            <button type="button" class="col-6 col-lg-12 btn btn-outline-danger">Reject</button>
+            <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-outline-success"
+                (click)="acceptOrder(order.orderId)">Accept</button>
+            <button type="button" class="col-6 col-lg-12 btn btn-outline-danger"
+                (click)="rejectOrder(order.orderId)">Reject</button>
         </div>
     </div>
 </div>
