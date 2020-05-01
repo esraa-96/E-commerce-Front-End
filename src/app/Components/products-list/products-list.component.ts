@@ -26,10 +26,24 @@ export class ProductsListComponent implements OnInit {
         (err) => {
           console.log(err);
         });
+      
+        /*this.service.createProduct(this.prd)
+        .subscribe(
+          (response) => {
+            console.log(this.prd)
+            //this.products = response;
+            console.log(response);
+            console.log("da el response");
+  
+          },
+          (err) => {
+            console.log(err);
+          });*/
 
       
    
   }
+  
   products;
   
   

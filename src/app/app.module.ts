@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-// import { ToastrModule } from 'ngx-toastr';
+import { ToastrModule } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
 import { ErrorComponent } from './Components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
@@ -56,6 +57,7 @@ const routes: Routes = [
     OrderComponent,
     OrderListComponent,
     ErrorComponent,
+    NavBarComponent,
     HomeComponent,
     ProfileComponent,
     LoginComponent,
@@ -67,7 +69,8 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     NgbModule,
-    RouterModule.forRoot(routes),// ToastrModule.forRoot(),
+    RouterModule.forRoot(routes),
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule
