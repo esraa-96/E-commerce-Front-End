@@ -22,7 +22,7 @@ export class ProductService {
   }
   editProduct(id,product)
   {
-    return this.ProductClient.post(`${this.baseURL}/${id}`,product);
+    return this.ProductClient.put(`${this.baseURL}/${id}`,product);
   }
 
   deleteProduct(id)

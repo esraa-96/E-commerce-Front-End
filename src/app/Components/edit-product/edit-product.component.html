@@ -1,13 +1,13 @@
 <div class="row">
   <div class="col-lg-5 col-md-6 col-11 offset-1 bg-white mt-3 rounded">
     <!--  form  -->
-    <form class="text-center p-5" [formGroup]="EditFrom" (submit)="Add()">
+    <form class="text-center p-5" [formGroup]="EditFrom">
 
-      <p class="h4 mb-4" id="title"> Create New Product</p>
+      <p class="h4 mb-4" id="title"> Update Product</p>
 
       <!-- Name -->
       <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid  Title</label>
-      <input type="text" formControlName="title" id="ProductTitle" class="form-control mb-4"
+      <input type="text" formControlName="title"  id="ProductTitle" class="form-control mb-4"
           placeholder="Product title*">
 
       <!-- Price -->
@@ -21,8 +21,10 @@
           min="0">
 
       <!-- Discount -->
-      <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="discount%"
-          min="0">
+      <label class="text-danger" *ngIf="discount.touched && discount.invalid">Please Enter Valid discount</label>
+
+        <input type="number" formControlName="discount" id="Price" class="form-control mb-4" placeholder="discount%"
+            min="0">
 
 
       <!-- catagory -->
@@ -48,12 +50,12 @@
       <div class="form-group">
           <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
           <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"
-          >{{description}}</textarea>
+          ></textarea>
       </div>
 
 
       <!-- Send button -->
-      <button class="btn btn-info btn-block" type="submit" id="Create">Add</button>
+      <button class="btn btn-info btn-block" (click)="Add(content)" id="Create">Add</button>
 
   </form>
 
@@ -115,3 +117,11 @@
 
   </div>
 </div>
+
+<ng-template #content let-c="close" let-d="dismiss" class="text-center">
+   
+  <div class="modal-body">
+    <p>{{afterAdd}}</p>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">OK</button>
+  </div>
+</ng-template>
