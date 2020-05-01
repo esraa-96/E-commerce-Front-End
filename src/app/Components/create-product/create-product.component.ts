@@ -3,7 +3,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { NotificationService } from 'src/app/Components/services/notification.service';
 import { ToastrService } from 'ngx-toastr';
-
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-create-product',
@@ -12,6 +12,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateProductComponent implements OnInit {
 
+  // constructor(private notifyService : NotificationService) { }
+  constructor(private service: ProductService) { 
+  }
+  ngOnInit(): void {
+
+  }
+  
   uploadImage: string = "choose Image";
   product;
 
@@ -20,13 +27,16 @@ export class CreateProductComponent implements OnInit {
     price: new FormControl('', [Validators.min(0), Validators.required]),
     image: new FormControl('', this.imageValidator()),
     message: new FormControl('', Validators.maxLength(50)),
-    quantity: new FormControl('', [Validators.required, Validators.min(0)])
+    quantity: new FormControl('', [Validators.required, Validators.min(0)]),
+    catagory:new FormControl('')
 
   });
 
 
-  // constructor(private notifyService : NotificationService) { }
-  constructor(private toastr: ToastrService) { }
+ get catagory(){
+   return this.createFrom.get('catagory');
+ }
+  
   get title() {
     return this.createFrom.get('title');
   }
@@ -67,13 +77,30 @@ export class CreateProductComponent implements OnInit {
     };
   }
 
-  ngOnInit(): void {
-  }
+ 
   Add() {
-    console.log(this.title);
-    debugger;
-    //  this.notifyService.showError("Data shown successfully !!", "ItSolutionStuff.com")
-    this.toastr.success("message", "title")
+    if (!this.title.invalid && !this.message.invalid && !this.quantity.invalid){
+    let product=  {
+        "productName":this.title.value,
+        "unitPrice": this.price.value,
+        "unitsInStock": this.quantity.value,
+        "discount": 0,
+        "category": this.catagory.value,
+        "description": this.message.value,
+        "isDeleted": false,
+      }
+      console.log(product);
+      this.service.createProduct(product).
+      subscribe((response) => {
+        console.log(response);
+      }, (err) => {
+        console.log("jj");
+        console.log(err);
+      })
+    }
+    else{
+
+    }
   }
 
 }
