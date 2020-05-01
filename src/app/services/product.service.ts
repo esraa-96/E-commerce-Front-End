@@ -18,11 +18,11 @@ export class ProductService {
   }
   createProduct(product)
   {
-    return this.ProductClient.post(`${this.baseURL}`,{body:product});
+    return this.ProductClient.post(`${this.baseURL}`,product);
   }
   editProduct(id,product)
   {
-    return this.ProductClient.post(`${this.baseURL}/${id}`,{body:product});
+    return this.ProductClient.post(`${this.baseURL}/${id}`,product);
   }
 
   deleteProduct(id)
