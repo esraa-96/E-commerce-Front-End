@@ -29,10 +29,18 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 
 const routes: Routes = [
 
+  { path: "", redirectTo: "index", pathMatch: "full" },
+  { path: "index", component: HomeComponent },
+  { path: "profile/:id", component: ProfileComponent },
+  { path: "about", component: AboutComponent },
+  { path: "cart/:id", component: CartComponent },
+  { path: "login", component: LoginComponent },
+  { path: "register", component: RegisterComponent },
   { path: "admin/products", component: ProductsListComponent },
   { path: "admin/orders", component: OrderListComponent },
   { path: 'admin/create', component: CreateProductComponent },
-  { path: 'admin/edit/:id', component: EditProductComponent }
+  { path: 'admin/edit/:id', component: EditProductComponent },
+  { path: '**', component: ErrorComponent },
 ]
 
 
