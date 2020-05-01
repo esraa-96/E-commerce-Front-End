@@ -16,7 +16,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.service.getAllProducts()
+    this.service.getAllProducts()
       .subscribe(
         (response) => {
           this.products = response;
@@ -25,34 +25,12 @@ export class ProductsListComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-        });*/
+        });
 
       
-        this.service.createProduct(this.prd)
-        .subscribe(
-          (response) => {
-            console.log(this.prd)
-            //this.products = response;
-            console.log(response);
-            console.log("da el response");
-  
-          },
-          (err) => {
-            console.log(err);
-          });
    
   }
   products;
-  prd={
-    //"productID": 500,
-    "productName": "skirt",
-    "unitPrice": 1000,
-    "unitsInStock": 50,
-    "discount": 0,
-    "category": 0,
-    "description": "this is a skirt",
-    "isDeleted": false
-    
-  }
+  
   
 }
