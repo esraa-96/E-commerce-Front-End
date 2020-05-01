@@ -39,20 +39,12 @@ export class ProductsListComponent implements OnInit {
           (err) => {
             console.log(err);
           });*/
+
+      
    
   }
   
   products;
-  prd={
-    //"productID": 500,
-    "productName": "skirt",
-    "unitPrice": 1000,
-    "unitsInStock": 50,
-    "discount": 0,
-    "category": 0,
-    "description": "this is a skirt",
-    "isDeleted": false
-    
-  }
+  
   
 }

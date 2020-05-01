@@ -14,8 +14,8 @@ export class OrderListComponent implements OnInit {
   orderList: any;
 
   ngOnInit(): void {
-    // debugger;
-    // this.authProvider.login("user@example.com", "Ahmed!23");
+    //   debugger;
+    //   this.authProvider.login("user@example.com", "Ahmed!23");
 
     // setTimeout(() => {
     this.orderProvider.getAllOrders()

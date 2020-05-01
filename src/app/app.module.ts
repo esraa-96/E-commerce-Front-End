@@ -19,9 +19,16 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
-import {ProductService} from './services/product.service';
-import { ErrorComponent } from './Components/error/error.component';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
+import { ProductService } from './services/product.service';
+import { ErrorComponent } from './Components/error/error.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AboutComponent } from './components/about/about.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component'
 
 const routes: Routes = [
 
@@ -42,12 +49,20 @@ const routes: Routes = [
     OrderComponent,
     OrderListComponent,
     ErrorComponent,
-    NavBarComponent
+    NavBarComponent,
+    HomeComponent,
+    ProfileComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    AboutComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    RouterModule.forRoot(routes),ToastrModule.forRoot(),
+    RouterModule.forRoot(routes),
+    ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule
