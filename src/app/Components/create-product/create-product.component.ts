@@ -82,12 +82,11 @@ export class CreateProductComponent implements OnInit {
     };
   }
 
- 
-
-
   open(content) {
     this.modalService.open(content);
   }
+
+  
   Add(content) {
     console.log(this.image);
     console.log("ll");
