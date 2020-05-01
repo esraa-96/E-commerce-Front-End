@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+// import { ToastrModule } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
@@ -19,8 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
-import {ProductService} from './services/product.service';
-import { ErrorComponent } from './Components/error/error.component'
+import { ProductService } from './services/product.service';
+import { ErrorComponent } from './Components/error/error.component';
+import { HomeComponent } from './components/home/home.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CartComponent } from './components/cart/cart.component';
+import { AboutComponent } from './components/about/about.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component'
 
 const routes: Routes = [
 
@@ -40,12 +47,19 @@ const routes: Routes = [
     ProductsListComponent,
     OrderComponent,
     OrderListComponent,
-    ErrorComponent
+    ErrorComponent,
+    HomeComponent,
+    ProfileComponent,
+    LoginComponent,
+    RegisterComponent,
+    CartComponent,
+    AboutComponent,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
     NgbModule,
-    RouterModule.forRoot(routes),ToastrModule.forRoot(),
+    RouterModule.forRoot(routes),// ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
     HttpClientModule
