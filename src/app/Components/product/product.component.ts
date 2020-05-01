@@ -30,6 +30,7 @@ export class ProductComponent implements OnInit {
     this.service.deleteProduct(id)
     .subscribe((response)=>{console.log(response)},(err)=>{console.log(err)});
     this.prd.isDeleted=true;
+    //this.router.navigate(['admin/products']);
   }
 
   @Input() prd ;

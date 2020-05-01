@@ -20,7 +20,8 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
 import {ProductService} from './services/product.service';
-import { ErrorComponent } from './Components/error/error.component'
+import { ErrorComponent } from './Components/error/error.component';
+import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
 
 const routes: Routes = [
 
@@ -40,7 +41,8 @@ const routes: Routes = [
     ProductsListComponent,
     OrderComponent,
     OrderListComponent,
-    ErrorComponent
+    ErrorComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,

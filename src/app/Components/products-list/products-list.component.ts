@@ -16,7 +16,7 @@ export class ProductsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    /*this.service.getAllProducts()
+    this.service.getAllProducts()
       .subscribe(
         (response) => {
           this.products = response;
@@ -25,10 +25,9 @@ export class ProductsListComponent implements OnInit {
         },
         (err) => {
           console.log(err);
-        });*/
-
+        });
       
-        this.service.createProduct(this.prd)
+        /*this.service.createProduct(this.prd)
         .subscribe(
           (response) => {
             console.log(this.prd)
@@ -39,9 +38,10 @@ export class ProductsListComponent implements OnInit {
           },
           (err) => {
             console.log(err);
-          });
+          });*/
    
   }
+  
   products;
   prd={
     //"productID": 500,
