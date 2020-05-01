@@ -27,10 +27,29 @@ export class ProductsListComponent implements OnInit {
           console.log(err);
         });
 
-      
+      //   this.service.editProduct(1,this.prd)
+      // .subscribe(
+      //   (response) => {
+      //     this.products = response;
+      //     console.log(response);
+
+      //   },
+      //   (err) => {
+      //     console.log(err);
+      //   });
+
    
   }
   products;
-  
+  prd=  {
+    "productID": 1,
+    "productName":'erap',
+    "unitPrice": 10,
+    "unitsInStock": 12,
+    "discount": 23,
+    "category": 1,
+    "description": "jjj",
+    "isDeleted": false,
+  }
   
 }
