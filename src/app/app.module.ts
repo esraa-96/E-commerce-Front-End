@@ -19,14 +19,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { AuthService } from './services/auth.service';
-import {ProductService} from './services/product.service'
+import {ProductService} from './services/product.service';
+import { ErrorComponent } from './Components/error/error.component'
 
 const routes: Routes = [
 
   { path: "admin/products", component: ProductsListComponent },
   { path: "admin/orders", component: OrderListComponent },
   { path: 'admin/create', component: CreateProductComponent },
-  { path: 'admin/edit', component: EditProductComponent }
+  { path: 'admin/edit/:id', component: EditProductComponent }
 ]
 
 
@@ -38,7 +39,8 @@ const routes: Routes = [
     ProductComponent,
     ProductsListComponent,
     OrderComponent,
-    OrderListComponent
+    OrderListComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
