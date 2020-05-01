@@ -1,46 +1,38 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http'
+import { HttpClient } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
 
-  constructor(private ProductClient:HttpClient) { }
+  constructor(private ProductClient: HttpClient) { }
   baseURL = 'http://localhost:3104/api/products';
-  getAllProducts()
-  {
+  getAllProducts() {
     return this.ProductClient.get(this.baseURL);
   }
-  getProductById(id)
-  {
+  getProductById(id) {
     return this.ProductClient.get(`${this.baseURL}/${id}`);
   }
-  createProduct(product)
-  {
-    return this.ProductClient.post(`${this.baseURL}`,product);
+  createProduct(product) {
+    return this.ProductClient.post(`${this.baseURL}`, product);
   }
-  editProduct(id,product)
-  {
-    return this.ProductClient.put(`${this.baseURL}/${id}`,product);
+  editProduct(id, product) {
+    return this.ProductClient.post(`${this.baseURL}/${id}`, product);
   }
 
-  deleteProduct(id)
-  {
+  deleteProduct(id) {
     return this.ProductClient.delete(`${this.baseURL}/${id}`);
   }
 
-  getProductByName(name)
-  {
+  getProductByName(name) {
     return this.ProductClient.get(`${this.baseURL}/${name}`);
   }
 
-  addImage(image)
-  {
-    return this.ProductClient.put(`${this.baseURL}/image`,{body:image})
+  addImage(image) {
+    return this.ProductClient.put(`${this.baseURL}/image`, { body: image })
   }
-  deleteImage()
-  {
-    
+  deleteImage() {
+
   }
 }
