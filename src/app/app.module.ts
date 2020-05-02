@@ -26,7 +26,9 @@ import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
-import { CartItemComponent } from './components/cart/cart-item/cart-item.component'
+import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
+import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
+import { UserInfoComponent } from './components/profile/user-info/user-info.component'
 
 const routes: Routes = [
 
@@ -63,7 +65,9 @@ const routes: Routes = [
     CartComponent,
     AboutComponent,
     EditProfileComponent,
-    CartItemComponent
+    CartItemComponent,
+    UserOrdersComponent,
+    UserInfoComponent
   ],
   imports: [
     BrowserModule,
