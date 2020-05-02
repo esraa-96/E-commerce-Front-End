@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "firstProject": {
+    "firstproject": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -21,7 +21,8 @@
             "aot": true,
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets/logo.png"
+              
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
