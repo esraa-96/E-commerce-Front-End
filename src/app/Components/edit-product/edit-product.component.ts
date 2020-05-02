@@ -34,8 +34,8 @@ export class EditProductComponent implements OnInit {
         image: new FormControl('', this.imageValidator()),
         message: new FormControl(this.product.description, Validators.maxLength(50)),
         quantity: new FormControl(this.product.unitsInStock, [Validators.required, Validators.min(0)]),
-        catagory:new FormControl(''),
-        discount:new FormControl('1',[Validators.max(100),Validators.min(1),Validators.required])
+        catagory:new FormControl(this.product.category),
+        discount:new FormControl(this.product.discount,[Validators.max(100),Validators.min(1),Validators.required])
     
       });
       },
@@ -124,25 +124,30 @@ EditFrom:FormGroup =new FormGroup({
   }
   //save Change Fun
   afterAdd:string;
-  Add(content) {
-    console.log(this.image);
+  save(content) {
+  
     console.log("ll");
+    
     if (!this.title.invalid && !this.message.invalid && !this.quantity.invalid && !this.discount.invalid
       && !this.price.invalid// && !this.image.invalid
       )
       {
     let product=  {
+        "productID" :this.id,
         "productName":this.title.value,
-        "unitPrice": this.price.value,
-        "unitsInStock": this.quantity.value,
+         "unitPrice": this.price.value,
+         "unitsInStock": this.quantity.value,
         "discount": this.discount.value,
         "category": this.catagory.value,
         "description": this.message.value,
         "isDeleted": false,
       }
       console.log(product);
-      this.service.editProduct(this.id,this.product).
+      this.service.editProduct(this.id,product).
       subscribe((response) => {
+        console.log("edit-----lll--")
+        console.log(this.product);
+        console.log("edit-------")
         console.log(response);
         this.afterAdd="successfull !";
         this.open(content);

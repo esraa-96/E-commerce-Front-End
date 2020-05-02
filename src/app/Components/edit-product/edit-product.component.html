@@ -30,7 +30,7 @@
       <!-- catagory -->
       <div class="text-left row pr-3">
           <label class="col-12 col-md-2" id="label">Catagory</label>
-          <select class="browser-default custom-select col-12 col-md-10 mb-4">
+          <select class="browser-default custom-select col-12 col-md-10 mb-4" formControlName="catagory">
               <option value="" disabled>Choose option</option>
               <option value="1" selected>Male</option>
               <option value="2">female</option>
@@ -50,12 +50,13 @@
       <div class="form-group">
           <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
           <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"
-          ></textarea>
+          formControlName="message"
+          >{{message.value}}</textarea>
       </div>
 
 
       <!-- Send button -->
-      <button class="btn btn-info btn-block" (click)="Add(content)" id="Create">SaveChange</button>
+      <button class="btn btn-info btn-block" (click)="save(content)" id="Create">SaveChange</button>
 
   </form>
 
