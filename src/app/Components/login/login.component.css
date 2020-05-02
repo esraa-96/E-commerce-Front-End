@@ -1,0 +1,46 @@
+#login{
+ background-image: url('/assets/login2.jpeg');
+ background-size: 100% 100%;
+ background-repeat: no-repeat;
+ height: 700px;
+ padding: 0px; 
+}
+
+#loginUp{
+    padding: 10px 0px 0px 2px;
+    text-align: center;
+}
+
+input{
+    margin: 25px auto;
+    padding: 29px
+}
+
+button{
+    font-size: 20px;
+    font-weight: 600;
+    background-color: #2f7dfc
+}
+#logo{
+    width: 70px;
+    height: 70px;
+}
+#title{
+    font-size: 46px;font-family: blackadder itc;
+}
+#trans{
+    background-color:#0808088c;
+    width: 100%;
+    height: 100%;
+    color: white;
+    text-align: center;
+    padding-top: 30%;
+}
+
+#trans p{
+    font-size: 37px;   
+}
+#trans h1{
+    font-size: 102px;
+    color: #2f7dfc;;
+}
