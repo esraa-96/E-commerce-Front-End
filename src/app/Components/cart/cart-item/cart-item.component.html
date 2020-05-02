@@ -1,0 +1,61 @@
+<div class="row p-0 pt-2">
+    <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
+        <div class="h5 mb-0 d-inline-block">
+            <!-- trash -->
+            <div class="d-inline-block pl-3 pr-3 btn btn-outline-danger" (click)="removeItem()">
+                <svg class="bi bi-trash" width="1em" height="1.7rem" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M5.5 5.5A.5.5 0 016 6v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm2.5 0a.5.5 0 01.5.5v6a.5.5 0 01-1 0V6a.5.5 0 01.5-.5zm3 .5a.5.5 0 00-1 0v6a.5.5 0 001 0V6z" />
+                    <path fill-rule="evenodd"
+                        d="M14.5 3a1 1 0 01-1 1H13v9a2 2 0 01-2 2H5a2 2 0 01-2-2V4h-.5a1 1 0 01-1-1V2a1 1 0 011-1H6a1 1 0 011-1h2a1 1 0 011 1h3.5a1 1 0 011 1v1zM4.118 4L4 4.059V13a1 1 0 001 1h6a1 1 0 001-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="pl-3 d-inline-block btn btn-link" style="width: auto;" (click)="toggleDescription()">
+                {{item.product.productName}}
+            </div>
+        </div>
+        <div class="h5 mb-0 d-inline-block">
+            <!-- plus -->
+            <div class="d-inline-block pl-3 pr-3 btn btn-outline-dark" (click)="plusOne()">
+                <svg class="bi bi-plus" width="1rem" height="1.7rem" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 3.5a.5.5 0 01.5.5v4a.5.5 0 01-.5.5H4a.5.5 0 010-1h3.5V4a.5.5 0 01.5-.5z"
+                        clip-rule="evenodd" />
+                    <path fill-rule="evenodd" d="M7.5 8a.5.5 0 01.5-.5h4a.5.5 0 010 1H8.5V12a.5.5 0 01-1 0V8z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+            <div class="pl-3 pr-3 d-inline-block text-center" style="width:3rem;">
+                {{item.numberOfItems}}
+            </div>
+            <!-- minus -->
+            <div class="d-inline-block pl-3 pr-3 btn btn-outline-dark" (click)="minusOne()">
+                <svg class=" bi bi-dash" width="1rem" height="1.7rem" viewBox="0 0 16 16" fill="currentColor"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.5 8a.5.5 0 01.5-.5h8a.5.5 0 010 1H4a.5.5 0 01-.5-.5z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+
+        </div>
+    </div>
+    <div *ngIf="showDesc" class="col-12">
+        <div class="row p-2 alert-secondary">
+            <div class="col-6 col-md-9">
+                {{item.product.description}}
+            </div>
+            <!-- <div class="position-absolute font-weight-bold" style="top: 0.5rem; right: 2rem;"> -->
+            <div class="col-6 col-md-3 font-weight-bold text-right">
+                <p class="m-0">
+                    Unit Price: {{item.product.unitPrice}} LE
+                </p>
+                <p *ngIf="item.product.discount > 0" class="m-0">
+                    Discount: {{item.product.discount*100}} %
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
