@@ -25,10 +25,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
+import { JwtModule } from "@auth0/angular-jwt";
 
 const routes: Routes = [
 
@@ -45,6 +45,10 @@ const routes: Routes = [
   { path: 'admin/edit/:id', component: EditProductComponent },
   { path: '**', component: ErrorComponent },
 ]
+
+export function tokenGetter() {
+  return localStorage.getItem("access_token");
+}
 
 
 @NgModule({
@@ -64,7 +68,6 @@ const routes: Routes = [
     RegisterComponent,
     CartComponent,
     AboutComponent,
-    EditProfileComponent,
     CartItemComponent,
     UserOrdersComponent,
     UserInfoComponent
@@ -76,7 +79,14 @@ const routes: Routes = [
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        whitelistedDomains: ["example.com"],
+        blacklistedRoutes: ["example.com/examplebadroute/"]
+      }
+    })
   ],
   providers: [
     httpInterceptorProviders,
