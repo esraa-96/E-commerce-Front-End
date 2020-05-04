@@ -14,18 +14,27 @@ export class OrderListComponent implements OnInit {
   orderList: any;
 
   ngOnInit(): void {
-    //   debugger;
-    //   this.authProvider.login("user@example.com", "Ahmed!23");
 
-    // setTimeout(() => {
-    this.orderProvider.getAllOrders()
-      .subscribe(
-        (response) => {
-          this.orderList = response;
-        },
-        (err) => {
-          console.log(err);
-        });
+    // this.authProvider.login("user@example.com", "Ahmed!23");
+    if (this.authProvider.getUserRole() == "admin") {
+      this.orderProvider.getAllOrders()
+        .subscribe(
+          (response) => {
+            this.orderList = response;
+          },
+          (err) => {
+            console.log(err);
+          });
+    } else if (this.authProvider.getUserRole() == "user") {
+      this.orderProvider.getOrders(this.authProvider.getUserId())
+        .subscribe(
+          (response) => {
+            this.orderList = response;
+          },
+          (err) => {
+            console.log(err);
+          });
+    }
     // }, 200);
   }
 

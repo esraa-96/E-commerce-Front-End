@@ -1,9 +1,9 @@
-<ul ngbNav #nav="ngbNav" class="nav-tabs dark" style="height: 50px;background-color: whitesmoke;" >
+<ul ngbNav #nav="ngbNav" class="nav-tabs dark shadow" style="height: 50px;background-color: whitesmoke;">
   <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="index">Home</a>
   </li>
-  <li ngbNavItem class="navChild" >
-    <a ngbNavLink routerLink="admin/products" >Products</a>
+  <li ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="admin/products">Products</a>
   </li>
   <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="register">Register</a>
@@ -17,12 +17,11 @@
   <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="profile/123">profile</a>
   </li>
-   <li ngbNavItem class="navChild">
+  <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="cart/123">cart</a>
   </li>
- <li ngbNavItem class="navChild">
-  <a ngbNavLink routerLink="admin/orders">orders</a>
-</li>
+  <li ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="admin/orders">orders</a>
+  </li>
 </ul>
 <div [ngbNavOutlet]="nav"></div>
-

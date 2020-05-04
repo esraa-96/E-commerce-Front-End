@@ -1,1 +1,38 @@
 <p>cart works!</p>
+
+<div class="container bg-white shadow border rounded">
+    <div class="row" *ngIf="cart.orderDetails.length > 0; else emptyCart">
+        <div class="col-12 mb-2 mt-2">
+            <app-cart-item *ngFor="let cartItem of cart.orderDetails" [item]="cartItem"></app-cart-item>
+        </div>
+        <div class="col-12 mb-2 d-flex justify-content-between border-top pt-1">
+            <div class="h6 mb-0 d-inline-block">DB Total Price:</div>
+            <div class="h6 mb-0 d-inline-block">{{cart.totalPrice}} LE</div>
+        </div>
+        <div class="col-12 mb-2 d-flex justify-content-between border-top pt-1">
+            <div class="h6 mb-0 d-inline-block">Angular Total Price:</div>
+            <div class="h6 mb-0 d-inline-block">{{totalPrice}} LE</div>
+        </div>
+        <div class="col-12 mb-2 d-flex justify-content-between border-top pt-1">
+            <div class="h6 mb-0 d-inline-block">Total items:</div>
+            <div class="h6 mb-0 d-inline-block">{{totalNumberOfItems}}</div>
+        </div>
+        <div class="col-12">
+            <button type="button" class="col-12 mb-2 mt-2 btn btn-outline-success"
+                (click)="submitOrder()">Submit</button>
+        </div>
+    </div>
+    <ng-template #emptyCart>
+        <div class="row">
+            <div class="col h5 text-center text-muted p-5">
+                <p>
+                    No items in your cart
+                </p>
+                <p>
+                    Add some products to your shopping cart
+                </p>
+
+            </div>
+        </div>
+    </ng-template>
+</div>
