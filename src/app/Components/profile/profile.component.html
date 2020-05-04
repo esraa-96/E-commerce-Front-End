@@ -1,7 +1,12 @@
 <div class="container">
     <div class="row">
-        <div class="d-flex bg-white col-12 p-3">
-            <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-pills pr-3 border-right" orientation="vertical">
+        <div class="col-12 mt-5 mb-5">
+            <h1 id="User">User Name</h1>
+        </div>
+        <!-- <div class="d-flex bg-white col-12 p-3">
+
+            <ul ngbNav #nav="ngbNav" [(activeId)]="active" 
+            class="nav-pills pr-3 border-right" orientation="vertical">
                 <li ngbNavItem="profile">
                     <a ngbNavLink>Profile</a>
                     <ng-template ngbNavContent>
@@ -13,15 +18,22 @@
                         <app-order-list></app-order-list>
                     </ng-template>
                 </li>
-                <!-- <li ngbNavItem="bottom">
+                <li ngbNavItem="bottom">
                     <a ngbNavLink>Bottom</a>
                     <ng-template ngbNavContent>
 
                     </ng-template> 
-                </li> -->
+                </li>
             </ul>
+            <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div> 
 
-            <div [ngbNavOutlet]="nav" class="ml-4 w-100"></div>
+        </div> -->
+        <div class="col-9 col-lg-7 ">
+            <app-user-orders></app-user-orders>
+         </div>
+        <div class="col-6 col-lg-4 offset-3 offset-md-0" id="info" >
+           <app-user-info></app-user-info>
         </div>
+        
     </div>
 </div>

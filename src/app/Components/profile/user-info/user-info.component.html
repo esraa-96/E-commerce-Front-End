@@ -1,1 +1,41 @@
-<p>user-info works!</p>
+<div id="info">
+        <div id="image">
+                 <img src="assets/women.jpg" id="img" class="w-75 h-auto"> 
+
+        </div>
+        <form class="text-center p-5" [formGroup]="createFrom">
+                <div *ngIf="canChange; else elseBlock" id="inputdiv">
+                        <input  type="text" value="user Name" class=" text-center" class="inputName">
+                </div>
+                <ng-template #elseBlock>
+                        <p class="userName">{{firstName}}</p>
+                </ng-template>
+
+
+                <div *ngIf="canChange; else elseEmail" class="inputdiv">
+                        <input  type="email" value="userName@gamil.com" class=" text-center" class="inputName">
+                </div>
+                <ng-template #elseEmail>
+                        <p class="userOther">userName@gamil.com</p>
+                </ng-template>
+
+
+                <div *ngIf="canChange; else elseGender" class="inputdiv">
+                      <select class="inputName">
+                              <option value="male">Male</option>
+                              <option value="female">Female</option>
+                      </select>
+                </div>
+                <ng-template #elseGender>
+                        <p class="userOther">Male</p>
+                </ng-template>
+
+                <input type="button" *ngIf="!canChange" class=" btn btn-primary bt" value="Edit">
+                <input type="button" *ngIf="canChange" class=" btn btn-primary bt" value="Save change">
+
+        </form>
+
+
+
+
+</div>

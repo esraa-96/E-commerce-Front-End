@@ -15,6 +15,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
+import{UserService}from './services/user.service'
 import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
@@ -92,7 +93,8 @@ export function tokenGetter() {
     httpInterceptorProviders,
     AuthService,
     OrderService,
-    ProductService
+    ProductService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

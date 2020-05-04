@@ -2,7 +2,7 @@
     background-image: url('/assets/login2.jpeg');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    padding: 0px; 
+    padding: 0px;
    }
    #upload{
     margin: 2px;
@@ -13,12 +13,12 @@
        padding: 5px 0px 0px 2px;
        text-align: center;
    }
-   
+
    input{
        margin: 25px auto;
        padding: 29px
    }
-   
+
    button{
        font-size: 20px;
        font-weight: 600;
@@ -39,9 +39,9 @@
        text-align: center;
        padding-top: 30%;
    }
-   
+
    #trans p{
-       font-size: 37px;   
+       font-size: 37px;
    }
    #trans h1{
        font-size: 102px;
@@ -58,4 +58,3 @@
        margin-bottom: 10px;
        border-radius: 50%;
    }
-   

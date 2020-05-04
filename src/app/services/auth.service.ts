@@ -35,6 +35,7 @@ export class AuthService {
     this.client.post(`${this.baseURL}/login`, user)
       .subscribe(
         (response: any) => {
+          debugger;
           if (response && response.message) {
             // We wanna store it in localStorage  
             localStorage.setItem('access_token', response.message);
@@ -42,17 +43,21 @@ export class AuthService {
           }
         },
         (err) => {
+          debugger;
           console.log(err);
         });
   }
   getAuthToken() {
     return `Bearer ${localStorage.getItem("access_token")}`;
   }
+
   getUserId() {
+    //debugger;
     let currentUser = this.jwtHelper.decodeToken(this.getAuthToken());
     if (currentUser)
-      return currentUser.Id;
+      return currentUser.ID;
   }
+
   getUserRole() {
     let currentUser = this.jwtHelper.decodeToken(this.getAuthToken());
     if (currentUser)
