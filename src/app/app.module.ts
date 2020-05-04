@@ -26,6 +26,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { FooterComponent } from './Components/footer/footer.component'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
@@ -69,6 +71,8 @@ export function tokenGetter() {
     RegisterComponent,
     CartComponent,
     AboutComponent,
+    EditProfileComponent,
+    FooterComponent,
     CartItemComponent,
     UserOrdersComponent,
     UserInfoComponent
