@@ -25,7 +25,8 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component'
+import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+import { FooterComponent } from './Components/footer/footer.component'
 
 const routes: Routes = [
 
@@ -61,7 +62,8 @@ const routes: Routes = [
     RegisterComponent,
     CartComponent,
     AboutComponent,
-    EditProfileComponent
+    EditProfileComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
