@@ -1,0 +1,46 @@
+#image{
+   text-align: center;
+   padding-top: 10px;
+}
+
+.userName{
+    font-size: 20px;
+    text-align: center;
+    color: #2f7dfc;
+    font-weight: bold;
+    padding-top: 5px;
+    text-transform: capitalize;
+}
+
+#img{
+    border-radius: 5%;
+}
+
+.inputName{
+    border-radius: 10px;
+    border: 1px solid gray;
+    width: 100%;
+    text-align: center;
+    
+}
+
+.inputdiv{
+    margin-top: 10px;
+}
+
+.userOther{
+    font-size: 16px;
+    text-align: center;
+    color: black;
+    font-weight: bold;
+
+}
+
+.bt{
+    font-family: Arial, Helvetica, sans-serif;
+    color:black;
+    width: 70%;
+    padding-top: 10px;
+    font-weight: bold;
+    margin-top: 10px;
+}

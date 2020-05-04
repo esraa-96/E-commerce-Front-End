@@ -60,11 +60,14 @@ export class AuthService {
   getAuthToken() {
     return localStorage.getItem("access_token");
   }
+
   getUserId() {
+    //debugger;
     let currentUser = this.jwtHelper.decodeToken(this.getAuthToken());
     if (currentUser)
-      return currentUser.Id;
+      return currentUser.ID;
   }
+
   getUserRole() {
     let currentUser = this.jwtHelper.decodeToken(this.getAuthToken());
     if (currentUser)
