@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { JwtHelperService } from '@auth0/angular-jwt'
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -27,26 +28,37 @@ export class AuthService {
   //   console.log(currentUser.Id);
   // }
 
+
   login(email, pw) {
     const user = {
       "email": email,
       "password": pw
     };
-    this.client.post(`${this.baseURL}/login`, user)
-      .subscribe(
-        (response: any) => {
-          if (response && response.message) {
-            // We wanna store it in localStorage  
-            localStorage.setItem('access_token', response.message);
-            // this.authToken = `Bearer ${response.message}`;
-          }
-        },
-        (err) => {
-          console.log(err);
-        });
+    return this.client.post(`${this.baseURL}/login`, user)
+      .pipe(
+        map(
+          (response: any) => {
+            if (response && response.message) {
+              // We wanna store it in localStorage  
+              localStorage.setItem('access_token', response.message);
+              return true;
+              // this.authToken = `Bearer ${response.message}`;
+            }
+            return false;
+          }));
+  }
+  logout() {
+    localStorage.removeItem('access_token');
+  }
+  isLoggedIn() {
+    let token = localStorage.getItem('access_token');
+    if (!token)
+      return false;
+    let isExpired = this.jwtHelper.isTokenExpired(token);
+    return !isExpired;
   }
   getAuthToken() {
-    return `Bearer ${localStorage.getItem("access_token")}`;
+    return localStorage.getItem("access_token");
   }
   getUserId() {
     let currentUser = this.jwtHelper.decodeToken(this.getAuthToken());
