@@ -2,7 +2,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HttpEventType, HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-upload',
+  selector: 'app-uploadImage',
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.css']
 })

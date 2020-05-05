@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+            <app-uploadImage (onUploadFinished)="uploadFinished($event)"></app-uploadImage>
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
                 <input type="hidden" formControlName="profilePhoto" class="form-control" />
                 <div class="form-group">

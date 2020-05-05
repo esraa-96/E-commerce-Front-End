@@ -5,10 +5,10 @@
   <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="admin/products">Products</a>
   </li>
-  <li *ngIf="isLoggedIn" ngbNavItem class="navChild">
+  <li *ngIf="isLoggedIn && !isAdmin" ngbNavItem class="navChild">
     <a ngbNavLink routerLink="profile">Profile</a>
   </li>
-  <li *ngIf="isLoggedIn" ngbNavItem class="navChild">
+  <li *ngIf="isLoggedIn && !isAdmin" ngbNavItem class="navChild">
     <a ngbNavLink routerLink="cart">Cart</a>
   </li>
   <li *ngIf="isLoggedIn && isAdmin" ngbNavItem class="navChild">
