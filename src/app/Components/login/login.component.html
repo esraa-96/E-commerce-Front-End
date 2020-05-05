@@ -1,5 +1,5 @@
 <div class="row" id="parent">
-    <div class="col-md-7 col-12" id="login">
+    <div class="col-md-6 col-12" id="login">
         <div id="trans">
             <h1>ERA</h1>
             <p>
@@ -7,7 +7,7 @@
             </p>
         </div>
     </div>
-    <div class="col-md-5 col-12">
+    <div class="col-md-6 col-12">
         <div class=" text-center mt-5 pt-5">
 
             <img src="assets/Logo.png" id="logo">
@@ -16,7 +16,7 @@
 
         <form [formGroup]="form" (ngSubmit)="signIn()">
             <div class="form-group">
-                <label for="username">Username</label>
+                <label for="username">Email</label>
                 <input type="text" formControlName="username" class="form-control"
                     [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
                 <div *ngIf="submitted && f.username.errors" class="invalid-feedback">

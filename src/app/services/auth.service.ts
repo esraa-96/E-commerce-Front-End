@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
+
   constructor(
     private client: HttpClient,
     private jwtHelper: JwtHelperService,
@@ -43,6 +44,11 @@ export class AuthService {
             return false;
           }));
   }
+
+  register(user: any) {
+    return this.client.post(`${this.baseURL}/register`, user);
+  }
+
   logout() {
     localStorage.removeItem('access_token');
     this.router.navigate(['/']);
