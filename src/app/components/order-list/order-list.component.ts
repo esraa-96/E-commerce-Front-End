@@ -9,9 +9,19 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class OrderListComponent implements OnInit {
 
-  constructor(private orderProvider: OrderService, private authProvider: AuthService) { }
+  constructor(
+    private orderProvider: OrderService,
+    private authProvider: AuthService) {
+    this.orderList = [];
+  }
 
   orderList: any;
+
+  get isAdmin() {
+    if (this.authProvider.getUserRole() == 'admin')
+      return true;
+    return false;
+  }
 
   ngOnInit(): void {
 
@@ -25,7 +35,8 @@ export class OrderListComponent implements OnInit {
           (err) => {
             console.log(err);
           });
-    } else if (this.authProvider.getUserRole() == "user") {
+    }
+   else if (this.authProvider.getUserRole() == "user") {
       this.orderProvider.getOrders(this.authProvider.getUserId())
         .subscribe(
           (response) => {

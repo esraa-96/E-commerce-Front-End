@@ -1,31 +1,58 @@
 <div class="row" id="parent">
-    <div class="col-md-7 col-12" id="login">
+    <div class="col-md-6 col-12" id="login">
         <div id="trans">
             <h1>ERA</h1>
             <p>
-                Fashion Collection <br> 2019 (wonen - men -kids)
+                Fashion Collection <br> 2019 (women - men - kids)
             </p>
         </div>
     </div>
-    <div class="col-md-5 col-12">
+    <div class="col-md-6 col-12">
         <div class=" text-center mt-5 pt-5">
-           
+
             <img src="assets/Logo.png" id="logo">
             <p class="h4 mb-4 text-center" id="title"> Login </p>
         </div>
+
+        <form [formGroup]="form" (ngSubmit)="signIn()">
+            <div class="form-group">
+                <label for="username">Email</label>
+                <input type="text" formControlName="username" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.username.errors }" />
+                <div *ngIf="submitted && f.username.errors" class="invalid-feedback">
+                    <div *ngIf="f.username.errors.required">Username is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" formControlName="password" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                    <div *ngIf="f.password.errors.required">Password is required</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Login
+                </button>
+                <a routerLink="../register" class="btn btn-link">Register</a>
+            </div>
+        </form>
+
         <!--  form  -->
-        <div class="" id="loginUp">
-            <!-- Name -->
-            <input type="email"  class="form-control  w-75 " placeholder="Email*">
+        <!-- <div class="" id="loginUp"> -->
+        <!-- Name -->
+        <!-- <input type="email" class="form-control  w-75 " placeholder="Email*"> -->
 
-            <!-- Email -->
-            <input type="password"  class="form-control  w-75 " placeholder="password*" min="0">
+        <!-- Email -->
+        <!-- <input type="password" class="form-control  w-75 " placeholder="password*" min="0"> -->
 
-            <!-- Send button -->
-            <button class="btn btn-info btn-block m-auto w-75">Login</button>
-            
-            <a href="#" class=" mt-2">Create account</a>
-        </div>
+        <!-- Send button -->
+        <!-- <button class="btn btn-info btn-block m-auto w-75" (click)="signIn()">Login</button> -->
+
+        <!-- <a href="#" class=" mt-2">Create account</a> -->
     </div>
+</div>
 
-    <div>
+<div>

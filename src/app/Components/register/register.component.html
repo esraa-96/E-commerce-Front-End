@@ -7,48 +7,140 @@
             </p>
         </div>
     </div>
-    <div class="col-md-6 col-12"> 
+    <div class="col-md-6 col-12">
         <div class=" text-center  pt-5">
             <p class="h4 mb-4 text-center" id="title"> Register </p>
         </div>
-        <!--  form  -->
+
         <div class="" id="loginUp">
 
             <div id="photo"></div>
             <div class="input-group w-75 m-auto">
-               
+
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
                 </div>
                 <div class="custom-file">
-                  <input type="file" class="custom-file-input" id="inputGroupFile01"
-                    aria-describedby="inputGroupFileAddon01">
-                  <label class="custom-file-label" for="inputGroupFile01">Image</label>
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Image</label>
                 </div>
-              </div>
-            <!-- Name -->
+            </div>
+
+            <app-uploadImage (onUploadFinished)="uploadFinished($event)"></app-uploadImage>
+            <form [formGroup]="form" (ngSubmit)="onSubmit()">
+                <input type="hidden" formControlName="profilePhoto" class="form-control" />
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" formControlName="firstName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <div *ngIf="submitted && f.firstName.errors" class="invalid-feedback">
+                        <div *ngIf="f.firstName.errors.required">First Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" formControlName="lastName" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <div *ngIf="submitted && f.lastName.errors" class="invalid-feedback">
+                        <div *ngIf="f.lastName.errors.required">Last Name is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="text" formControlName="email" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                    <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                        <div *ngIf="f.email.errors.required">Email is required</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" formControlName="password" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.password.errors }" />
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                        <div *ngIf="f.password.errors.required">Password is required</div>
+                        <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <select formControlName="gender" class="form-control browser-default custom-select mb-4">
+                        <option value="0">Male</option>
+                        <option value="1">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Mobile Number</label>
+                    <input type="text" formControlName="phoneNumber" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.phoneNumber.errors }" />
+                    <div *ngIf="submitted && f.phoneNumber.errors" class="invalid-feedback">
+                        <div *ngIf="f.phoneNumber.errors.required">Mobile Number is Invalid</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" formControlName="address" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }" />
+                    <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <div *ngIf="f.address.errors.required">Address is Invalid</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button [disabled]="loading" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register
+                    </button>
+                    <a routerLink="../login" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row" id="parent">
+    <div class="col-md-6 col-12" id="login">
+        <div id="trans">
+            <h1>ERA</h1>
+            <p>
+                Fashion Collection <br> 2019 (wonen - men -kids)
+            </p>
+        </div>
+    </div>
+    <div class="col-md-6 col-12">
+        <div class=" text-center  pt-5">
+            <p class="h4 mb-4 text-center" id="title"> Register </p>
+        </div>
+
+        <div class="" id="loginUp">
+
+            <div id="photo"></div>
+            <div class="input-group w-75 m-auto">
+
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
+                </div>
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="inputGroupFile01"
+                        aria-describedby="inputGroupFileAddon01">
+                    <label class="custom-file-label" for="inputGroupFile01">Image</label>
+                </div>
+            </div>
             <input type="text" class="form-control  w-75 " placeholder="user Name*">
-            <!-- Email -->
+
             <input type="email" class="form-control  w-75 " placeholder="Email*">
 
-            <!-- pass -->
             <input type="password" class="form-control  w-75 " placeholder="password*" min="0">
 
-            <!-- gender -->
-                <select class="browser-default custom-select w-75 mb-4">
-                    <option value="0">male</option>
-                    <option value="1">female</option>
+            <select class="browser-default custom-select w-75 mb-4">
+                <option value="0">male</option>
+                <option value="1">female</option>
+            </select>
 
-                </select>
-          
 
-            <!-- Send button -->
             <button class="btn btn-info btn-block m-auto w-75">Register</button>
 
-            <a href="#" class=" mt-2">Login</a>
+            <a routerLink="../login" class=" mt-2">Login</a>
         </div>
     </div>
 
-    <div>
-
-     
+</div> -->
