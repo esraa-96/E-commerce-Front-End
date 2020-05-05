@@ -25,12 +25,13 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
+//import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { FooterComponent } from './Components/footer/footer.component'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
 import { JwtModule } from "@auth0/angular-jwt";
+import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
 
 const routes: Routes = [
 
@@ -41,7 +42,7 @@ const routes: Routes = [
   { path: "cart/:id", component: CartComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "admin/products", component: ProductsListComponent },
+  { path: "admin/products/:id", component: ProductsListComponent },
   { path: "admin/orders", component: OrderListComponent },
   { path: 'admin/create', component: CreateProductComponent },
   { path: 'admin/edit/:id', component: EditProductComponent },
@@ -70,11 +71,12 @@ export function tokenGetter() {
     RegisterComponent,
     CartComponent,
     AboutComponent,
-    EditProfileComponent,
+  //  EditProfileComponent,
     FooterComponent,
     CartItemComponent,
     UserOrdersComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    ArrivalCarouselComponent,
   ],
   imports: [
     BrowserModule,

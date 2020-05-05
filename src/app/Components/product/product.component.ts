@@ -13,6 +13,7 @@ export class ProductComponent implements OnInit {
   constructor(private service:ProductService,private router: Router) {}
 
   ngOnInit(): void {
+  
   }
 
   currentPrdId;

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
+import { product } from 'src/mapModules/product';
 
 @Component({
   selector: 'app-products-list',
@@ -9,13 +10,18 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductsListComponent implements OnInit {
 
-  //PrdId;
-  constructor(private service: ProductService, myAR: ActivatedRoute) {
-    //this.PrdId=myAR.snapshot.params["id"];
-  }
+  products;
+  prdCategory;
+  constructor(private service: ProductService,private active:ActivatedRoute,private router:Router) {
+      this.prdCategory=this.active.snapshot.params["id"];
+    }
+
 
   ngOnInit(): void {
-    this.service.getAllProducts()
+    if(this.prdCategory==10)
+    {
+      console.log(`prd cat ${this.prdCategory}`)
+      this.service.getAllProducts()
       .subscribe(
         (response) => {
           this.products = response;
@@ -24,6 +30,52 @@ export class ProductsListComponent implements OnInit {
         (err) => {
           console.log(err);
         });
+    }
+    else if(this.prdCategory==0)
+    {
+      console.log(`prd cat ${this.prdCategory}`)
+      this.service.getProductByCategory(0)
+      .subscribe(
+        (response) => {
+          this.products = response;
+          console.log(response);
+        },
+        (err) => {
+          console.log(err);
+        });
+    }
+    else if(this.prdCategory==1)
+    {
+      console.log(`prd cat ${this.prdCategory}`)
+      this.service.getProductByCategory(1)
+      .subscribe(
+        (response) => {
+          this.products = response;
+          console.log(response);
+        },
+        (err) => {
+          console.log(err);
+        });
+    }
+    else if(this.prdCategory==2)
+    {
+      console.log(`prd cat ${this.prdCategory}`)
+      this.service.getProductByCategory(2)
+      .subscribe(
+        (response) => {
+          this.products = response;
+          console.log(response);
+        },
+        (err) => {
+          console.log(err);
+        });
+    }
+    else 
+    {
+      this.router.navigate['**']
+    }
+
+        
 
     /*this.service.createProduct(this.prd)
     .subscribe(
@@ -52,7 +104,6 @@ export class ProductsListComponent implements OnInit {
 
   }
 
-  products;
   prd = {
     "productID": 1,
     "productName": 'erap',

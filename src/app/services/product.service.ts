@@ -9,7 +9,7 @@ export class ProductService {
   constructor(private ProductClient: HttpClient) { }
   baseURL = 'http://localhost:3104/api/products';
   getAllProducts() {
-    return this.ProductClient.get(this.baseURL);
+    return this.ProductClient.get(this.baseURL); 
   }
   getProductById(id) {
     return this.ProductClient.get(`${this.baseURL}/${id}`);
@@ -29,8 +29,12 @@ export class ProductService {
     return this.ProductClient.get(`${this.baseURL}/${name}`);
   }
 
+  getProductByCategory(category) {
+    return this.ProductClient.get(`${this.baseURL}/${category}`);
+  }
+
   addImage(image) {
-    return this.ProductClient.put(`${this.baseURL}/image`, { body: image })
+    return this.ProductClient.put(`${this.baseURL}/image`, image)
   }
   deleteImage() {
 
