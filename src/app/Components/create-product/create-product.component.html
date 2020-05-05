@@ -1,6 +1,6 @@
 <div class="col-12 col-md-8 col-lg-6 offset-lg-3 offset-md-2 bg-white mt-3 mb-3 rounded">
     <!--  form  -->
-    <form class="text-center p-5" [formGroup]="createFrom" (submit)="Add(content)">
+<form class="text-center p-5" [formGroup]="createFrom" (submit)="Add(content)">
 
         <p class="h4 mb-4" id="title"> Create New Product</p>
 
@@ -42,8 +42,10 @@
         <!--image-->
         <label class="text-danger" *ngIf="image.touched && image.invalid">Please Enter image(png - jpg or jpeg)</label>
         <div class="custom-file mb-4 ">
-            <input type="file" class="custom-file-input" id="customFile" formControlName="image">
-            <label class="custom-file-label" for="customFile">{{uploadImage}}</label>
+            <!-- <input type="file" class="custom-file-input" id="customFile" formControlName="image">
+            <label class="custom-file-label" for="customFile">{{uploadImage}}</label> -->
+            <input type="hidden"   class="custom-file-input" id="customFile" formControlName="image">
+            <!-- <app-upload></app-upload> -->
         </div>
 
         <!-- Message -->
@@ -56,6 +58,8 @@
         <!-- Send button -->
         <button class="btn btn-info btn-block" (click)="Add(content)" id="Create">Add</button>
     </form>
+
+    
 </div>
 
 

@@ -35,7 +35,8 @@ export class OrderListComponent implements OnInit {
           (err) => {
             console.log(err);
           });
-    } else if (this.authProvider.getUserRole() == "user") {
+    }
+   else if (this.authProvider.getUserRole() == "user") {
       this.orderProvider.getOrders(this.authProvider.getUserId())
         .subscribe(
           (response) => {

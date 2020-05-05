@@ -122,4 +122,8 @@ export class CreateProductComponent implements OnInit {
     }
   }
 
+  uploadFinished(cc){
+    
+  }
+
 }

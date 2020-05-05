@@ -15,6 +15,8 @@ export class UserInfoComponent implements OnInit {
   id:String;
   user:{"firstName":""};
   firstName=" ";
+  
+  
 
   createFrom = new FormGroup({
     title: new FormControl('', [Validators.required, Validators.maxLength(30)]),
