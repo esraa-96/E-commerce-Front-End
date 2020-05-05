@@ -1,16 +1,14 @@
-<div class="row bg-white mb-3 p-0 pt-2 border border-gray rounded">
+<div *ngIf="order.status!=4" class="row bg-white mb-3 p-0 pt-2 border border-gray rounded">
 
-    <!-- <h1>{{order.orderId}}</h1> -->
     <!-- Header & Body -->
     <div class="col-12 col-lg-8">
         <!-- Header (Name,Date,Status) -->
         <div class="mb-2">
 
-            <div class="h6 m-0">{{order.user.fullName.firstName}} {{order.user.fullName.lastName}}</div>
+            <div *ngIf="isAdmin" class="h6 m-0">{{order.user.fullName.firstName}}
+                {{order.user.fullName.lastName}}</div>
+            <div *ngIf="!isAdmin" class="h6 m-0">Order No.: {{order.orderId}}</div>
             <div class="pl-2 text-muted small font-italic">{{order.date}}</div>
-            <!-- <span class="h3 position-absolute text-success" style="top: 25px; right: 2rem;">&#10004;</span>
-                <span class="h3 position-absolute text-danger" style="top: 15px; right: 2rem;">&#10008;</span>
-                <span class="h3 position-absolute text-dark" style="top: 5px; right: 2rem;">⏱ 🕑 </span> -->
 
             <!-- Pending Icon -->
             <div *ngIf="order.status == 1">
@@ -62,17 +60,27 @@
         </div>
     </div>
     <!-- Footer (ActionButtons,TotalPrice) -->
-    <div *ngIf="order.status == 1" class="col-12 col-lg-4 p-0 p-lg-3 mb-2">
+    <div class="col-12 col-lg-4 p-0 p-lg-3 mb-2">
         <div class="col-12 mb-2 d-flex justify-content-between align-items-center">
             <div class="h6 mb-0 d-inline-block">Total Price:</div>
             <div class="h6 mb-0 d-inline-block">{{order.totalPrice}} LE</div>
         </div>
 
-        <div class="col-12">
-            <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-outline-success"
-                (click)="acceptOrder(order.orderId)">Accept</button>
-            <button type="button" class="col-6 col-lg-12 btn btn-outline-danger"
-                (click)="rejectOrder(order.orderId)">Reject</button>
+        <div *ngIf="order.status == 1">
+            <div *ngIf="isAdmin">
+                <div class="col-12">
+                    <button type="button" class="col-6 col-lg-12 mb-lg-3 btn btn-outline-success"
+                        (click)="acceptOrder(order.orderId)">Accept</button>
+                    <button type="button" class="col-6 col-lg-12 btn btn-outline-danger"
+                        (click)="rejectOrder(order.orderId)">Reject</button>
+                </div>
+            </div>
+            <div *ngIf="!isAdmin">
+                <div class="col-12">
+                    <button type="button" class="col-12  mb-lg-3 btn btn-outline-danger"
+                        (click)="cancelOrder(order.orderId)">Cancel</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

@@ -13,6 +13,16 @@ export class NavBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  get isAdmin() {
+    if (this.auth.getUserRole() == 'admin')
+      return true;
+    return false;
+  }
+
+  get isLoggedIn() {
+    return this.auth.isLoggedIn();
+  }
+
   logout() {
     this.auth.logout();
   }

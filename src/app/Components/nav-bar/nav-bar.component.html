@@ -5,26 +5,26 @@
   <li ngbNavItem class="navChild">
     <a ngbNavLink routerLink="admin/products">Products</a>
   </li>
-  <li ngbNavItem class="navChild">
+  <!-- <li ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="about">About</a>
+  </li> -->
+  <li *ngIf="isLoggedIn" ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="profile">Profile</a>
+  </li>
+  <li *ngIf="isLoggedIn" ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="cart">Cart</a>
+  </li>
+  <li *ngIf="isLoggedIn && isAdmin" ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="admin/orders">Orders</a>
+  </li>
+  <li *ngIf="!isLoggedIn" ngbNavItem class="navChild">
     <a ngbNavLink routerLink="register">Register</a>
   </li>
-  <li ngbNavItem class="navChild">
-    <a ngbNavLink routerLink="login">login</a>
+  <li *ngIf="!isLoggedIn" ngbNavItem class="navChild">
+    <a ngbNavLink routerLink="login">Login</a>
   </li>
-  <li ngbNavItem class="navChild">
+  <li *ngIf="isLoggedIn" ngbNavItem class="navChild">
     <a ngbNavLink (click)='logout()'>Logout</a>
-  </li>
-  <li ngbNavItem class="navChild">
-    <a ngbNavLink routerLink="about">about</a>
-  </li>
-  <li ngbNavItem class="navChild">
-    <a ngbNavLink routerLink="profile/123">profile</a>
-  </li>
-  <li ngbNavItem class="navChild">
-    <a ngbNavLink routerLink="cart/123">cart</a>
-  </li>
-  <li ngbNavItem class="navChild">
-    <a ngbNavLink routerLink="admin/orders">orders</a>
   </li>
 </ul>
 <div [ngbNavOutlet]="nav"></div>

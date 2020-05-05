@@ -15,7 +15,7 @@ import { OrderListComponent } from './components/order-list/order-list.component
 import { ReactiveFormsModule } from '@angular/forms';
 import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
-import{UserService}from './services/user.service'
+import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
 import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
@@ -26,7 +26,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
-import { EditProfileComponent } from './components/edit-profile/edit-profile.component';
 import { FooterComponent } from './Components/footer/footer.component'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
@@ -37,9 +36,9 @@ const routes: Routes = [
 
   { path: "", redirectTo: "index", pathMatch: "full" },
   { path: "index", component: HomeComponent },
-  { path: "profile/:id", component: ProfileComponent },
+  { path: "profile", component: ProfileComponent },
   { path: "about", component: AboutComponent },
-  { path: "cart/:id", component: CartComponent },
+  { path: "cart", component: CartComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "admin/products", component: ProductsListComponent },
@@ -71,7 +70,6 @@ export function tokenGetter() {
     RegisterComponent,
     CartComponent,
     AboutComponent,
-    EditProfileComponent,
     FooterComponent,
     CartItemComponent,
     UserOrdersComponent,

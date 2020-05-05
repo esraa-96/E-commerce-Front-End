@@ -1,8 +1,19 @@
-<div>order-list works!</div>
 <div class="container">
     <div class="row row-cols-1">
-        <div class="col">
+        <div *ngIf="orderList.length > 0" class="col">
             <app-order *ngFor="let eachorder of orderList" [order]="eachorder"></app-order>
+        </div>
+        <div *ngIf="orderList.length == 0" class="col">
+            <div class="col h5 text-center text-muted p-5">
+                <p>
+                    There are no orders yet
+                </p>
+                <div *ngIf="!isAdmin">
+                    <p>
+                        Enjoy shopping and submit your first order
+                    </p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
