@@ -1,6 +1,10 @@
 <div class="container">
     <div class="row">
-        <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of products"
-        [prd]="eachPrd" ></app-product> 
+        <div class="col-4 offset-8">
+            <a class="btn btn-outline-success m-2 w-100" routerLink="../create">Create</a>
+        </div>
+        <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of products" [prd]="eachPrd">
+        </app-product>
+
     </div>
 </div>

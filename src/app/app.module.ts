@@ -6,10 +6,10 @@ import { ToastrModule } from 'ngx-toastr';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http'
 import { AppComponent } from './app.component';
-import { CreateProductComponent } from './Components/create-product/create-product.component';
-import { EditProductComponent } from './Components/edit-product/edit-product.component';
-import { ProductsListComponent } from './Components/products-list/products-list.component';
-import { ProductComponent } from './Components/product/product.component';
+import { CreateProductComponent } from './components/create-product/create-product.component';
+import { EditProductComponent } from './components/edit-product/edit-product.component';
+import { ProductsListComponent } from './components/products-list/products-list.component';
+import { ProductComponent } from './components/product/product.component';
 import { OrderComponent } from './components/order/order.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -17,16 +17,16 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
-import { NavBarComponent } from './Components/nav-bar/nav-bar.component'
+import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
-import { ErrorComponent } from './Components/error/error.component';
+import { ErrorComponent } from './components/error/error.component';
 import { HomeComponent } from './components/home/home.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
-import { FooterComponent } from './Components/footer/footer.component'
+import { FooterComponent } from './components/footer/footer.component'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'

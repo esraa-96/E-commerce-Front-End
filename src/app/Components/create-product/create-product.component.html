@@ -1,18 +1,18 @@
 <div class="col-12 col-md-8 col-lg-6 offset-lg-3 offset-md-2 bg-white mt-3 mb-3 rounded">
+    <app-uploadImage></app-uploadImage>
     <!--  form  -->
     <form class="text-center p-5" [formGroup]="createFrom" (submit)="Add(content)">
 
         <p class="h4 mb-4" id="title"> Create New Product</p>
 
         <!-- Name -->
-        <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid  Title</label>
+        <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid Title</label>
         <input type="text" formControlName="title" id="ProductTitle" class="form-control mb-4"
             placeholder="Product title*">
 
         <!-- Price -->
-        <label class="text-danger" *ngIf="price.touched && price.invalid">Please Enter Valid  price</label>
+        <label class="text-danger" *ngIf="price.touched && price.invalid">Please Enter Valid price</label>
         <input type="number" formControlName="price" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
-
 
         <!-- quantity -->
         <label class="text-danger" *ngIf="quantity.touched && quantity.invalid">Please Enter Valid quantity</label>
@@ -29,7 +29,7 @@
         <!-- catagory -->
         <div class="text-left row pr-3">
             <label class="col-12 col-md-2" id="label">Catagory</label>
-            <select class="browser-default custom-select col-12 col-md-10 mb-4"formControlName="catagory">
+            <select class="browser-default custom-select col-12 col-md-10 mb-4" formControlName="catagory">
                 <option value="" disabled>Choose option</option>
                 <option value="0" selected>Men</option>
                 <option value="1">Women</option>
@@ -49,7 +49,8 @@
         <!-- Message -->
         <div class="form-group">
             <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
-            <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description" formControlName="message"></textarea>
+            <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"
+                formControlName="message"></textarea>
         </div>
 
 
@@ -61,10 +62,9 @@
 
 
 <ng-template #content let-c="close" let-d="dismiss" class="text-center">
-   
+
     <div class="modal-body">
-      <p>{{afterAdd}}</p>
-      <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">OK</button>
+        <p>{{afterAdd}}</p>
+        <button type="button" class="btn btn-outline-dark" (click)="c('Save click')">OK</button>
     </div>
-  </ng-template>
-  
+</ng-template>
