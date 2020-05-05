@@ -31,6 +31,7 @@ import { CartItemComponent } from './components/cart/cart-item/cart-item.compone
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
 import { JwtModule } from "@auth0/angular-jwt";
+import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
 
@@ -73,7 +74,8 @@ export function tokenGetter() {
     FooterComponent,
     CartItemComponent,
     UserOrdersComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

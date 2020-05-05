@@ -52,8 +52,8 @@ export class AuthService {
   logout() {
     localStorage.removeItem('access_token');
     this.router.navigate(['/']);
-
   }
+
   isLoggedIn() {
     let token = localStorage.getItem('access_token');
     if (!token)

@@ -28,8 +28,13 @@ export class RegisterComponent implements OnInit {
       lastName: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      gender: [0, Validators.required]
+      gender: [0, Validators.required],
+      profilePhoto: [''],
+      phoneNumber: [''],
+      address: ['']
     });
+
+
   }
 
   get f() { return this.form.controls; }
@@ -54,6 +59,9 @@ export class RegisterComponent implements OnInit {
           // this.alertService.error(error);
           this.loading = false;
         });
+  }
+  public uploadFinished = (event) => {
+    this.form.controls.profilePhoto.setValue(event.dbPath);
   }
 
 }
