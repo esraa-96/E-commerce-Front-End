@@ -17,7 +17,7 @@ export class OrderComponent implements OnInit {
 
   @Input() order;
   get isAdmin() {
-    if (this.auth.getUserId() == 'admin')
+    if (this.auth.getUserRole() == 'admin')
       return true;
     return false;
   }
