@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
 @Component({
   selector: 'app-cart',
@@ -7,17 +8,35 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CartComponent implements OnInit {
 
-  constructor() { }
+  constructor(private confirmationDialogService: ConfirmationDialogService) { }
 
   ngOnInit(): void {
   }
-  submitOrder() {
-    //update in database
-    // confirm before submitting
-    console.log('submitClicked');
-    alert('Your order is submitted successfully');
+
+  private submitOrder() {
+    // Submit the order to database
+    console.log('order Submitted successfully');
+
+
+    // Handel getting the new cart
+
+
+    // Delete this after handeling the new cart
     this.cart = { "orderDetails": [] };
   }
+
+  openConfirmationDialog() {
+    this.confirmationDialogService.confirm('Confirm', 'Are you sure you want to submit your order?', 'Submit', 'Back')
+      .then((confirmed) => {
+        if (confirmed)
+          this.submitOrder()
+      })
+      .catch(() => {
+        //console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)')
+      });
+  }
+
+
   get totalNumberOfItems() {
     let total = 0;
     for (let i = 0; i < this.cart.orderDetails.length; i++) {

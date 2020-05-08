@@ -17,6 +17,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
+import{UploadService}from "./services/upload.service";
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
 import { ErrorComponent } from './components/error/error.component';
@@ -33,6 +34,7 @@ import { UserInfoComponent } from './components/profile/user-info/user-info.comp
 import { JwtModule } from "@auth0/angular-jwt";
 import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 
 const routes: Routes = [
 
@@ -78,7 +80,8 @@ export function tokenGetter() {
     UserOrdersComponent,
     UserInfoComponent,
     ArrivalCarouselComponent,
-    UploadComponent
+    UploadComponent,
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +104,8 @@ export function tokenGetter() {
     AuthService,
     OrderService,
     ProductService,
-    UserService
+    UserService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })
