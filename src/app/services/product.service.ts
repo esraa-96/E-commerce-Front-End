@@ -30,7 +30,8 @@ export class ProductService {
   }
 
   addImage(image) {
-    return this.ProductClient.put(`${this.baseURL}/image`, { body: image })
+    debugger;
+    return this.ProductClient.put(`${this.baseURL}/image`,image);
   }
   deleteImage() {
 

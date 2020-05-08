@@ -17,6 +17,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
+import{UploadService}from "./services/upload.service";
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
 import { ErrorComponent } from './components/error/error.component';
@@ -98,7 +99,8 @@ export function tokenGetter() {
     AuthService,
     OrderService,
     ProductService,
-    UserService
+    UserService,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })
