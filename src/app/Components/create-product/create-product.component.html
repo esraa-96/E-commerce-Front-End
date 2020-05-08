@@ -1,35 +1,34 @@
 <div class="col-12 col-md-8 col-lg-6 offset-lg-3 offset-md-2 bg-white mt-3 mb-3 rounded">
-    <app-uploadImage></app-uploadImage>
     <!--  form  -->
-<form class="text-center p-5" [formGroup]="createFrom" (submit)="Add(content)">
+    <form class="text-center p-5" [formGroup]="createFrom">
 
         <p class="h4 mb-4" id="title"> Create New Product</p>
 
         <!-- Name -->
-        <label class="text-danger" *ngIf="title.touched && title.invalid">Please Enter Valid Title</label>
-        <input type="text" formControlName="title" id="ProductTitle" class="form-control mb-4"
-            placeholder="Product title*">
+        <label class="text-danger" *ngIf="f.productName.touched && f.productName.invalid">Please Enter Valid Name</label>
+        <input type="text" formControlName="productName" id="ProductTitle" class="form-control mb-4"
+            placeholder="Product Name*">
 
         <!-- Price -->
-        <label class="text-danger" *ngIf="price.touched && price.invalid">Please Enter Valid price</label>
-        <input type="number" formControlName="price" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
+        <label class="text-danger" *ngIf="f.unitPrice.touched && f.unitPrice.invalid">Please Enter Valid price</label>
+        <input type="number" formControlName="unitPrice" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
 
         <!-- quantity -->
-        <label class="text-danger" *ngIf="quantity.touched && quantity.invalid">Please Enter Valid quantity</label>
-        <input type="number" formControlName="quantity" id="Price" class="form-control mb-4" placeholder="quantity*"
+        <label class="text-danger" *ngIf="f.unitsInStock.touched && f.unitsInStock.invalid">Please Enter Valid quantity</label>
+        <input type="number" formControlName="unitsInStock" id="Price" class="form-control mb-4" placeholder="quantity*"
             min="0">
 
         <!-- Discount -->
-        <label class="text-danger" *ngIf="discount.touched && discount.invalid">Please Enter Valid discount</label>
+        <label class="text-danger" *ngIf="f.discount.touched && f.discount.invalid">Please Enter Valid discount</label>
 
         <input type="number" formControlName="discount" id="Price" class="form-control mb-4" placeholder="discount%"
             min="0">
 
 
         <!-- catagory -->
-        <div class="text-left row pr-3">
-            <label class="col-12 col-md-2" id="label">Catagory</label>
-            <select class="browser-default custom-select col-12 col-md-10 mb-4" formControlName="catagory">
+        <div class="text-left">
+            <label class="" id="label">category</label>
+            <select class="browser-default custom-select" formControlName="category">
                 <option value="" disabled>Choose option</option>
                 <option value="0" selected>Men</option>
                 <option value="1">Women</option>
@@ -40,27 +39,48 @@
 
 
         <!--image-->
-        <label class="text-danger" *ngIf="image.touched && image.invalid">Please Enter image(png - jpg or jpeg)</label>
-        <div class="custom-file mb-4 ">
+        <label  class="text-danger" *ngIf="!validImage">
+            Please Enter image(png - jpg or jpeg)</label>
+        <div class="mb-4">
+            <label class="" for="img" id="label" >Product Image</label>
+            <div class="p-0">
+                <input type="file" #file placeholder="Choose file"  name="img" (change)="ImageUploader(file.files)" style="display:none;">
+                <button type="button" class="btn btn-info btn-block"  (click)="file.click()">Upload Image</button>
+            </div>
+            <div class="col-md-3">
+                <span class="upload" *ngIf="progress > 0">
+                    {{progress}}%
+                </span>
+                <span class="text-success" *ngIf="message">
+                    {{message}}
+                </span>
+            </div>
+            <!-- margin-left: 14%;
+    border: 1px solid red;
+    width: %;
+    width: 70%; -->
+
             <!-- <input type="file" class="custom-file-input" id="customFile" formControlName="image">
             <label class="custom-file-label" for="customFile">{{uploadImage}}</label> -->
-            <input type="hidden"   class="custom-file-input" id="customFile" formControlName="image">
+            <!-- <input type="hidden"   class="custom-file-input" id="customFile" formControlName="image"> -->
             <!-- <app-upload></app-upload> -->
         </div>
 
         <!-- Message -->
         <div class="form-group">
-            <label class="text-danger" *ngIf="message.touched && message.invalid">Maxlength is 100</label>
+            <label class="text-danger" *ngIf="f.description.touched && f.description.invalid">Maxlength is 100</label>
             <textarea class="form-control rounded-0" id="Details" rows="3" placeholder="Description"
-                formControlName="message"></textarea>
+                formControlName="description"></textarea>
         </div>
 
 
         <!-- Send button -->
-        <button class="btn btn-info btn-block" (click)="Add(content)" id="Create">Add</button>
+        <button [disabled]="loading" class="btn btn-info btn-block" (click)="Add(content)" id="Create">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Add</button>
     </form>
 
-    
+
 </div>
 
 
