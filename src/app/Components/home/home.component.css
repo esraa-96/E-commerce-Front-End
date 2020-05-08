@@ -1,4 +1,4 @@
-.grad {
+/* .grad {
     background-image: linear-gradient(to right,black ,darkgrey, grey,black);
   }
   #wrapper {
@@ -11,4 +11,9 @@
 }
 #second {
     overflow: hidden; 
+} */
+
+.categoryy :hover
+{
+    cursor: pointer;
 }

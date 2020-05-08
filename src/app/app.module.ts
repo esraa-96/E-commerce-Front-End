@@ -32,6 +32,7 @@ import { CartItemComponent } from './components/cart/cart-item/cart-item.compone
 import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
 import { JwtModule } from "@auth0/angular-jwt";
+import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
 import { UploadComponent } from './components/upload/upload.component';
 
 const routes: Routes = [
@@ -43,7 +44,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "admin/products", component: ProductsListComponent },
+  { path: "admin/products/:id", component: ProductsListComponent },
   { path: "admin/orders", component: OrderListComponent },
   { path: 'admin/create', component: CreateProductComponent },
   { path: 'admin/edit/:id', component: EditProductComponent },
@@ -72,10 +73,12 @@ export function tokenGetter() {
     RegisterComponent,
     CartComponent,
     AboutComponent,
+  //  EditProfileComponent,
     FooterComponent,
     CartItemComponent,
     UserOrdersComponent,
     UserInfoComponent,
+    ArrivalCarouselComponent,
     UploadComponent
   ],
   imports: [
