@@ -39,9 +39,9 @@ export class ProductService {
   }
 
   deleteImage(image) {
-    debugger;
-    let httpParams = new HttpParams().set('productID', image["productID"]);
-      httpParams.set('imagePath', image["imagePath"]);
-    let option={params:image}
-    return this.ProductClient.delete(`${this.baseURL}/image`, option)}
+    // debugger;
+    // let httpParams = new HttpParams().set('productID', image["productID"]);
+    //   httpParams.set('imagePath', image["imagePath"]);
+    // let option={params:image}
+    return this.ProductClient.post(`${this.baseURL}/image`, image)}
 }

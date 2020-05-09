@@ -38,6 +38,10 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { UserAuthGuard } from './services/user-auth-guard.service';
+import { ProductFilterPipe } from './components/product-filter.pipe';
+import { FormsModule } from '@angular/forms'
+
+
 
 const routes: Routes = [
 
@@ -84,7 +88,8 @@ export function tokenGetter() {
     UserInfoComponent,
     ArrivalCarouselComponent,
     UploadComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProductFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -93,6 +98,7 @@ export function tokenGetter() {
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

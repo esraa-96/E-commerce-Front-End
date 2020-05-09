@@ -24,7 +24,7 @@ export class CreateProductComponent implements OnInit {
   productID;
   fileImage=null;
   validEx=["image/png","image/jpeg","image/gif"];
-  validImage=true;
+  validImage=false;
   // constructor(private notifyService : NotificationService) { }
 
   //ctor

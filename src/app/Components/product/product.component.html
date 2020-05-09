@@ -1,5 +1,10 @@
 <div class="card" *ngIf="prd.isDeleted==false">
+  <div *ngIf="prd.image.length==0 else otherBlock">
   <img src="assets/def.jpg" class="card-img-top" alt="productImage">
+  </div>
+  <ng-template #otherBlock>
+    <img [src]="urlServer+prd.image[0].imagePath" class="card-img-top" alt="productImage">
+  </ng-template>
   <div class="card-body">
       <h5 class="card-title">{{prd.productName}}</h5>
       <p class="card-text" *ngIf="prd.description !='' ; else elseBlock"> {{prd.description}}</p>
@@ -10,7 +15,7 @@
   <div class="card-footer" style="text-align: center;" >
     <div *ngIf="admin; else falseBlock">
       <button class="btn btn-info col-4 mr-3 ml-1" (click)="GoToEdit(prd.productID)"> Edit </button>
-      <button class="btn btn-danger col-4 " (click)="delete(prd.productID)">Delete</button> <br> <br>
+      <button class="btn btn-danger col-4 " (click)="openConfirmationDialog(prd.productID)">Delete</button> <br> <br>
     </div>
     <ng-template #falseBlock>
         <button class="btn btn-primary mb-2" (click)="toCart(prd.productID)">Add to cart</button>
