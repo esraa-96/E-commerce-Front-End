@@ -5,28 +5,28 @@
     
     <form class="text-center p-5" [formGroup]="EditFrom">
 
-      <p class="h4 mb-4" id="title"> Create New Product</p>
+      <p class="h4 mb-4" id="title"> Edit Product</p>
     
       <!-- Name -->
       <label class="text-danger" *ngIf="f.productName.touched && f.productName.invalid">Please Enter Valid Name</label>
-      <label class="" id="label">ProductName</label>
+      <label class="" id="label">ProductName*</label>
       <input type="text" formControlName="productName" id="ProductTitle" class="form-control mb-4"
           placeholder="Product Name*">
 
       <!-- Price -->
       <label class="text-danger" *ngIf="f.unitPrice.touched && f.unitPrice.invalid">Please Enter Valid price</label>
-      <label class="" id="label">Price</label>
+      <label class="" id="label">Price*</label>
       <input type="number" formControlName="unitPrice" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
 
       <!-- quantity -->
       <label class="text-danger" *ngIf="f.unitsInStock.touched && f.unitsInStock.invalid">Please Enter Valid quantity</label>
-      <label class="" id="label">Quantity</label>
+      <label class="" id="label">Quantity*</label>
       <input type="number" formControlName="unitsInStock" id="Price" class="form-control mb-4" placeholder="quantity*"
           min="0">
 
       <!-- Discount -->
       <label class="text-danger" *ngIf="f.discount.touched && f.discount.invalid">Please Enter Valid discount</label>
-      <label class="" id="label">Discount %</label>
+      <label class="" id="label">Discount% *</label>
       <input type="number" formControlName="discount" id="Price" class="form-control mb-4" placeholder="discount%"
           min="0">
 
