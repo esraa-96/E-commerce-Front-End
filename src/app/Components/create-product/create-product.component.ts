@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+
 import { ProductService } from 'src/app/services/product.service';
 import { UploadService } from "src/app/services/upload.service";
 import { HttpEventType } from '@angular/common/http';
@@ -40,7 +41,7 @@ export class CreateProductComponent implements OnInit {
     description: new FormControl('', Validators.maxLength(50)),
     unitsInStock: new FormControl('', [Validators.required, Validators.min(0)]),
     category: new FormControl(''),
-    discount: new FormControl('', [Validators.max(100), Validators.min(1), Validators.required])
+    discount: new FormControl('', [Validators.max(100), Validators.min(0), Validators.required])
 
   });
 
@@ -128,7 +129,7 @@ export class CreateProductComponent implements OnInit {
 
 
   createProduct(content){
-    
+    this.f.discount.setValue(this.f.discount.value/100);
     this.service.createProduct(this.createFrom.value)
     .toPromise().then((Response)=>{
      
