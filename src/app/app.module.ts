@@ -17,7 +17,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
-import{UploadService}from "./services/upload.service";
+import {UploadService}from "./services/upload.service";
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
 import { ErrorComponent } from './components/error/error.component';
@@ -35,6 +35,10 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { ProductFilterPipe } from './components/product-filter.pipe';
+import {FormsModule} from '@angular/forms'
+
+
 
 const routes: Routes = [
 
@@ -81,7 +85,8 @@ export function tokenGetter() {
     UserInfoComponent,
     ArrivalCarouselComponent,
     UploadComponent,
-    ConfirmationDialogComponent
+    ConfirmationDialogComponent,
+    ProductFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -90,6 +95,7 @@ export function tokenGetter() {
     ToastrModule.forRoot(),
     ReactiveFormsModule,
     BrowserAnimationsModule,
+    FormsModule,
     HttpClientModule,
     JwtModule.forRoot({
       config: {

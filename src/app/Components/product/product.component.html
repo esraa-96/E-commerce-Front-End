@@ -1,5 +1,10 @@
 <div class="card" *ngIf="prd.isDeleted==false">
+  <div *ngIf="prd.image.length==0 else otherBlock">
   <img src="assets/def.jpg" class="card-img-top" alt="productImage">
+  </div>
+  <ng-template #otherBlock>
+    <img [src]="prd.image[0]" class="card-img-top" alt="productImage">
+  </ng-template>
   <div class="card-body">
       <h5 class="card-title">{{prd.productName}}</h5>
       <p class="card-text" *ngIf="prd.description !='' ; else elseBlock"> {{prd.description}}</p>

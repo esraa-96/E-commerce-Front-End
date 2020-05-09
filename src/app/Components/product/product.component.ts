@@ -29,8 +29,9 @@ export class ProductComponent implements OnInit {
   }
   
 
-  ngOnInit(): void {
 
+  ngOnInit(): void {
+    console.log(this.prd.image.length)
   }
 
   openConfirmationDialog(id) {
