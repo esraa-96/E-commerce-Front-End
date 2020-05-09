@@ -5,6 +5,9 @@ import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
+import { UploadService } from "src/app/services/upload.service";
+import { HttpEventType } from '@angular/common/http';
+
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
@@ -12,162 +15,237 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 
 export class EditProductComponent implements OnInit {
-  constructor(private myActive: ActivatedRoute, private service: ProductService, private modalService: NgbModal) {
+
+  //attribute
+  EditFrom: FormGroup = new FormGroup({
+    productID:new FormControl(''),
+    productName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+    unitPrice: new FormControl('', [Validators.min(0), Validators.required]),
+    photo: new FormControl(''),
+    description: new FormControl('', Validators.maxLength(50)),
+    unitsInStock: new FormControl('', [Validators.required, Validators.min(0)]),
+    category: new FormControl(''),
+    discount: new FormControl('', [Validators.max(100), Validators.min(1), Validators.required])
+
+  });
+  product: any = {};
+  uploadImage: string = "choose Image";
+  id: any;
+  pageLoaded: boolean = false;
+
+  public progress: number;
+  public message: string = "";
+  afterAdd: string;
+  loading;
+  productID;
+  fileImage=null;
+  validEx=["image/png","image/jpeg","image/gif"];
+  validImage=true;
+  productImages:any[];
+  urlServer="http://localhost:3104/";
+  imgAddFlag:boolean=true;
+  //===================================
+
+  //ctor
+  constructor(private myActive: ActivatedRoute,
+    private service: ProductService, private modalService: NgbModal,private upload: UploadService) {
     this.id = myActive.snapshot.params["id"];
     console.log(myActive.snapshot.params["id"]);
     console.log("da el id")
   }
+  //====================================
 
+  //init
   ngOnInit(): void {
 
-    this.service.getProductById(this.id)
+    this.getProductById(this.id);
+
+  }
+  //=================================
+
+  //functions
+  get f() { return this.EditFrom.controls; }
+
+  getProductById(id) {
+    this.service.getProductById(id)
       .subscribe(
         (response) => {
           this.product = response;
-
           console.log(response);
           console.log('response------------');
 
-          this.EditFrom = new FormGroup({
-            title: new FormControl(this.product.productName, [Validators.required, Validators.maxLength(30)]),
-            price: new FormControl(this.product.unitPrice, [Validators.min(0), Validators.required]),
-            image: new FormControl('', this.imageValidator()),
-            message: new FormControl(this.product.description, Validators.maxLength(50)),
-            quantity: new FormControl(this.product.unitsInStock, [Validators.required, Validators.min(0)]),
-            catagory: new FormControl(this.product.category),
-            discount: new FormControl(this.product.discount, [Validators.max(100), Validators.min(1), Validators.required])
+         this.productImages = response["image"];
+         console.log(response["image"]["length"] )
+        // debugger;
+          if(response["image"]["length"]==0)
+          {
 
-          });
+            this.imgAddFlag=false;
+          }
+          else
+          {
+            this.imgAddFlag=true;
+          }
+        //  console.log(response["image"][0]["imagePath"]);
+
+          this.pageLoaded = true;
+          this.updateFormData(this.product);
+
         },
         (err) => {
           console.log(err);
         });
-    console.log('+++++++++++');
+  }
 
+  updateFormData(product: object) {
+    this.EditFrom.setValue({
+      productName: product["productName"],
+      unitPrice: product["unitPrice"],
+      unitsInStock: product["unitsInStock"],
+      description: product["description"],
+      discount: product["discount"],
+      category:product["category"],
+      photo:"",
+      productID:this.id
+     
+    });
 
   }
 
-  product: any = {
-
-  };
-
-
-  uploadImage: string = "choose Image";
-
-  EditFrom: FormGroup = new FormGroup({
-    title: new FormControl(this.product.productName, [Validators.required, Validators.maxLength(30)]),
-    price: new FormControl('0', [Validators.min(0), Validators.required]),
-    image: new FormControl('', this.imageValidator()),
-    message: new FormControl('', Validators.maxLength(50)),
-    quantity: new FormControl('', [Validators.required, Validators.min(0)]),
-    catagory: new FormControl(''),
-    discount: new FormControl('0', [Validators.max(1), Validators.min(0), Validators.required])
-
-  });
-  // get catagory(){
-  //   return this.EditFrom.get('catagory');
-  // }
-
-  id: any;
-  get title() {
-    return this.EditFrom.get('title');
-  }
-  set title(value) {
-    this.EditFrom.controls.title.setValue(value);
-  }
-
-  get discount() {
-    return this.EditFrom.get('discount');
-  }
-
-  set discount(value) {
-    this.EditFrom.controls.discount.setValue(value);
-
-  }
-  get price() {
-    return this.EditFrom.get('price');
-  }
-
-  get image() {
-    return this.EditFrom.get('image');
-  }
-
-  get message() {
-    return this.EditFrom.get('message');
-  }
-
-  get quantity() {
-    return this.EditFrom.get('quantity');
-  }
-
-  get catagory() {
-    return this.EditFrom.get('catagory');
-  }
-
-
-  //Validation
-  imageValidator(): ValidatorFn {
-
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      var ext = /^.+\.([^.]+)$/.exec(control.value);
-
-      let valid: boolean = false;
-      if (ext != null && ext.length >= 2) {
-        // console.log(ext[0].split('\\'));
-        const file = ext[0].split('\\');
-        this.uploadImage = file[file.length - 1];
-        if (ext[1] == "jpg" || ext[1] == 'jpeg' || ext[1] == 'png')
-          valid = true;
-
-      }
-
-      //  console.log(valid);
-      return !valid ? { 'email': { value: control.value } } : null;
-    };
-  }
   open(content) {
     this.modalService.open(content);
   }
-  //save Change Fun
-  afterAdd: string;
-  save(content) {
 
-    console.log("ll");
-
-    if (!this.title.invalid && !this.message.invalid && !this.quantity.invalid && !this.discount.invalid
-      && !this.price.invalid// && !this.image.invalid
-   ) {
-      let product = {
-        "productID": this.id,
-        "productName": this.title.value,
-        "unitPrice": this.price.value,
-        "unitsInStock": this.quantity.value,
-        "discount": this.discount.value,
-        "category": this.catagory.value,
-        "description": this.message.value,
-        "isDeleted": false,
-      
-      }
-      console.log(product);
-      this.service.editProduct(this.id, product).
-        subscribe((response) => {
-          console.log("edit-----lll--")
-          console.log(this.product);
-          console.log("edit-------")
-          console.log(response);
-          this.afterAdd = "successfull !";
-          this.open(content);
-        }, (err) => {
-          console.log("jj");
-          console.log(err);
-          this.afterAdd = "Sever error !";
-          this.open(content);
-        })
+  ValidateImage(imageURl){
+    if(imageURl&&this.validEx.includes(imageURl[0]["type"]))
+    {
+      this.validImage=true;
+      return true;
     }
-    else {
-      this.afterAdd = "Please Enter Valid data!";
-      this.open(content);
-    }
-  }
-
+    this.validImage=false;
+    return false;
+  
 }
+
+
+  ImageUploader(files,content) {
+    console.log("kkk");
+    if( this.ValidateImage(files))
+    {
+    this.fileImage=files;
+    }
+    this.SaveImage(content);
+   
+    
+   }
+ 
+  public SaveImage(content){
+    if(this.fileImage==null)return;
+     this.upload.uploadFile(this.fileImage).subscribe
+     (event => {
+       if (event.type === HttpEventType.UploadProgress)
+         this.progress = Math.round(100 * event.loaded / event.total);
+       else if (event.type === HttpEventType.Response) {
+         this.message = 'Upload success.';
+         debugger;
+         let body = event.body;
+         this.f.photo.setValue(body["dbPath"])    
+         console.log(this.f.photo.value);
+         this.addImageIntoProduct(content);
+       }
+     },
+     error=>{
+       this.fileImage=null;
+ 
+     }
+     );
+   }
+   
+   addImageToProduct(){
+    let PrdImage={
+      "productID":this.id,
+      "imagePath": this.f.photo.value
+       }
+       return this.service.addImage(PrdImage);
+     }
+
+  deleteImageToProduct(path){
+      let PrdImage={
+        "productID":this.id,
+        "imagePath":path
+         }
+
+         return this.service.deleteImage(PrdImage);
+       }
+
+
+   addImageIntoProduct(content){
+    this.addImageToProduct().toPromise()
+    .then((Response)=>{
+     this.afterAdd = "successfull !";
+     this.open(content);
+    //  this.loading = false;
+    //this.productImages.push(this.f.photo.value);//-----------------
+    console.log(this.productImages);
+    }).catch((error=>{
+     console.log(error);
+     this.afterAdd = "Image  error !";
+     this.open(content);
+    //  this.loading = false;
+    }))
+   }
+
+   delete(path,content){
+    //  console.log(path);
+    // this.deleteImageToProduct(path).toPromise()
+    // .then((Response)=>{
+    //  this.afterAdd = "successfull !";
+    //  this.open(content);
+    // //  this.loading = false;
+    // this.productImages=[];//--------------
+    // }).catch((error=>{
+    //  console.log(error);
+    //  this.afterAdd = "can't delete  !";
+    //  this.open(content);
+    // //  this.loading = false;
+    // }))
+   }
+
+  updateProduct(content){
+    this.f.discount.setValue(this.f.discount.value/100);
+    this.service.editProduct(this.id,this.EditFrom.value)
+    .toPromise().then((Response)=>{
+   
+      this.afterAdd = "successfull !";
+      this.loading=false;
+      this.open(content);
+
+    }).catch((error)=>{
+      console.log(error);
+      this.afterAdd = "Sever error !";
+      this.open(content);
+      this.loading = false;
+    });
+  }
+  public save(content) {
+    console.log("save======")
+    debugger;
+     //for button
+     console.log(this.f);
+     if (this.EditFrom.invalid) {
+       this.afterAdd = "Please Enter Valid data!";
+       this.open(content);
+       this.loading=false;
+       return;
+ 
+     }
+    //if success
+     this.loading = true;
+     console.log(this.EditFrom.value);
+     this.updateProduct(content);
+     
+ 
+   }
+  }
+ 
+  

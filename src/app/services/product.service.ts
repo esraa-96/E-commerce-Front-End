@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient ,HttpParams} from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +18,7 @@ export class ProductService {
     return this.ProductClient.post(`${this.baseURL}`, product);
   }
   editProduct(id, product) {
-    return this.ProductClient.post(`${this.baseURL}/${id}`, product);
+    return this.ProductClient.put(`${this.baseURL}/${id}`, product);
   }
 
   deleteProduct(id) {
@@ -34,10 +34,14 @@ export class ProductService {
   }
 
   addImage(image) {
-    debugger;
+    //debugger;
     return this.ProductClient.put(`${this.baseURL}/image`,image);
   }
-  deleteImage() {
 
-  }
+  deleteImage(image) {
+    debugger;
+    let httpParams = new HttpParams().set('productID', image["productID"]);
+      httpParams.set('imagePath', image["imagePath"]);
+    let option={params:image}
+    return this.ProductClient.delete(`${this.baseURL}/image`, option)}
 }
