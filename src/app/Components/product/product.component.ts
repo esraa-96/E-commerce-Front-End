@@ -15,6 +15,8 @@ export class ProductComponent implements OnInit {
   constructor(private service:ProductService,private router: Router,private authorize:AuthService,  
     private confirmationDialogService: ConfirmationDialogService) {}
 
+  urlServer="http://localhost:3104/";
+
   toCart(id)
   {
     console.log(`user added item number ${id} to the cart`)
@@ -31,7 +33,6 @@ export class ProductComponent implements OnInit {
 
 
   ngOnInit(): void {
-    console.log(this.prd.image.length)
   }
 
   openConfirmationDialog(id) {
