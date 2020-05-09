@@ -25,7 +25,7 @@ export class EditProductComponent implements OnInit {
     description: new FormControl('', Validators.maxLength(50)),
     unitsInStock: new FormControl('', [Validators.required, Validators.min(0)]),
     category: new FormControl(''),
-    discount: new FormControl('', [Validators.max(100), Validators.min(1), Validators.required])
+    discount: new FormControl('', [Validators.max(100), Validators.min(0), Validators.required])
 
   });
   product: any = {};
@@ -103,7 +103,7 @@ export class EditProductComponent implements OnInit {
       unitPrice: product["unitPrice"],
       unitsInStock: product["unitsInStock"],
       description: product["description"],
-      discount: product["discount"],
+      discount: product["discount"]*100,
       category:product["category"],
       photo:"",
       productID:this.id
@@ -138,6 +138,8 @@ export class EditProductComponent implements OnInit {
    
     
    }
+
+
  
   public SaveImage(content){
     if(this.fileImage==null)return;
@@ -160,6 +162,7 @@ export class EditProductComponent implements OnInit {
      }
      );
    }
+
    
    addImageToProduct(){
     let PrdImage={
@@ -169,6 +172,26 @@ export class EditProductComponent implements OnInit {
        return this.service.addImage(PrdImage);
      }
 
+
+   addImageIntoProduct(content){
+    this.addImageToProduct().toPromise()
+    .then((Response)=>{
+     this.afterAdd = "successfull !";
+     this.open(content);
+    //  this.loading = false;
+    //console.log(this.f.photo.value);
+     console.log("------respose");
+     console.log(Response);
+     this.imgAddFlag=true;
+    this.productImages.push(Response);//-----------------
+    console.log(this.productImages);
+    }).catch((error=>{
+     console.log(error);
+     this.afterAdd = "Image  error !";
+     this.open(content);
+    //  this.loading = false;
+    }))
+   }
   deleteImageToProduct(path){
       let PrdImage={
         "productID":this.id,
@@ -179,37 +202,28 @@ export class EditProductComponent implements OnInit {
        }
 
 
-   addImageIntoProduct(content){
-    this.addImageToProduct().toPromise()
+
+
+
+  
+  delete(path,content){
+     console.log(path);
+    this.deleteImageToProduct(path).toPromise()
     .then((Response)=>{
      this.afterAdd = "successfull !";
      this.open(content);
     //  this.loading = false;
-    //this.productImages.push(this.f.photo.value);//-----------------
-    console.log(this.productImages);
+    this.productImages=[];//--------------=====================
+    this.imgAddFlag=false;
     }).catch((error=>{
      console.log(error);
-     this.afterAdd = "Image  error !";
+     this.afterAdd = "can't delete  !";
      this.open(content);
     //  this.loading = false;
     }))
    }
 
-   delete(path,content){
-    //  console.log(path);
-    // this.deleteImageToProduct(path).toPromise()
-    // .then((Response)=>{
-    //  this.afterAdd = "successfull !";
-    //  this.open(content);
-    // //  this.loading = false;
-    // this.productImages=[];//--------------
-    // }).catch((error=>{
-    //  console.log(error);
-    //  this.afterAdd = "can't delete  !";
-    //  this.open(content);
-    // //  this.loading = false;
-    // }))
-   }
+
 
   updateProduct(content){
     this.f.discount.setValue(this.f.discount.value/100);
@@ -227,6 +241,7 @@ export class EditProductComponent implements OnInit {
       this.loading = false;
     });
   }
+
   public save(content) {
     console.log("save======")
     debugger;
