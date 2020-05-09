@@ -16,17 +16,9 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {}
 
 
-  MenCategory(id)
+  ShowCategory(id)
   {
     this.router.navigate(['admin/products',id]);
   }
-   WomenCategory(id)
-   {
-     this.router.navigate(['admin/products',2]);
-   }
-   KidsCategory(id)
-   {
-     this.router.navigate(['admin/products',3]);
-   }
   
 }

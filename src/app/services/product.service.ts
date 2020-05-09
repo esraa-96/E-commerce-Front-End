@@ -30,7 +30,7 @@ export class ProductService {
   }
 
   getProductByCategory(category) {
-    return this.ProductClient.get(`${this.baseURL}/${category}`);
+    return this.ProductClient.get(`${this.baseURL}/category/${category}`);
   }
 
   addImage(image) {

@@ -1,5 +1,5 @@
 <!-- Footer -->
-<footer class="page-footer font-small dark bg-light pt-4" style="border-radius:10px ;">
+<footer class="page-footer font-small dark bg-light pt-4 mt-6" style="border-radius:10px ;">
 
     <!-- Footer Links -->
     <div class="container text-center text-md-left">
@@ -106,42 +106,17 @@
     <hr>
   
     <!-- Call to action -->
-    <ul class="list-unstyled list-inline text-center py-2">
+    <ul>
+    <!-- <ul class="list-unstyled list-inline text-center py-2" *ngIf="!IsLoggedIn"> -->
       <li class="list-inline-item">
-        <h5 class="mb-1">Register for free</h5>
+        <h5 class="mb-1" >Register for free</h5>
       </li>
       <li class="list-inline-item">
-        <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+        <a routerLink="register" class="btn btn-danger btn-rounded">Sign Up!</a>
       </li>
-    </ul>
-    <!-- Call to action -->
-  
-    <hr>
-  
-    <!-- Social buttons -->
-    <ul class="list-unstyled list-inline text-center">
-      <li class="list-inline-item">
-        <a class="btn-floating btn-fb mx-1">
-          <i class="fab fa-facebook-f"> </i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-tw mx-1">
-          <i class="fab fa-twitter"> </i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-gplus mx-1">
-          <i class="fab fa-google-plus-g"> </i>
-        </a>
-      </li>
-      <li class="list-inline-item">
-        <a class="btn-floating btn-li mx-1">
-          <i class="fab fa-linkedin-in"> </i>
-        </a>
-      </li>
-     
-    </ul>
+    <!-- </ul> -->
+  </ul>
+   
     
   
   </footer>

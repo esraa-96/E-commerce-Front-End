@@ -2,6 +2,7 @@ import { Component, OnInit} from '@angular/core';
 import { ProductService } from 'src/app/services/product.service';
 import { ActivatedRoute, RouteReuseStrategy, Router } from '@angular/router';
 import { product } from 'src/mapModules/product';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-products-list',
@@ -12,11 +13,19 @@ export class ProductsListComponent implements OnInit {
 
   products;
   prdCategory;
-  constructor(private service: ProductService,private active:ActivatedRoute,private router:Router) {
-      this.prdCategory=this.active.snapshot.params["id"];
-    }
 
+  constructor(private service: ProductService,private active:ActivatedRoute,private router:Router,
+  private authorize : AuthService)
+  {
+    this.prdCategory=this.active.snapshot.params["id"];
+  }
 
+  get admin() {
+    if (this.authorize.getUserRole() == 'admin')
+      return true;
+    else
+      return false;
+  }
   ngOnInit(): void {
     if(this.prdCategory==10)
     {
