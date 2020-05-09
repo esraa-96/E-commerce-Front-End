@@ -17,7 +17,7 @@ import { httpInterceptorProviders } from './http-interceptors';
 import { OrderService } from './services/order.service';
 import { UserService } from './services/user.service'
 import { AuthService } from './services/auth.service';
-import{UploadService}from "./services/upload.service";
+import { UploadService } from "./services/upload.service";
 import { NavBarComponent } from './components/nav-bar/nav-bar.component'
 import { ProductService } from './services/product.service';
 import { ErrorComponent } from './components/error/error.component';
@@ -35,20 +35,23 @@ import { JwtModule } from "@auth0/angular-jwt";
 import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
 import { UploadComponent } from './components/upload/upload.component';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
+import { AuthGuard } from './services/auth-guard.service';
+import { AdminAuthGuard } from './services/admin-auth-guard.service';
+import { UserAuthGuard } from './services/user-auth-guard.service';
 
 const routes: Routes = [
 
   { path: "", redirectTo: "index", pathMatch: "full" },
   { path: "index", component: HomeComponent },
-  { path: "profile", component: ProfileComponent },
   { path: "about", component: AboutComponent },
-  { path: "cart", component: CartComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
   { path: "admin/products/:id", component: ProductsListComponent },
-  { path: "admin/orders", component: OrderListComponent },
-  { path: 'admin/create', component: CreateProductComponent },
-  { path: 'admin/edit/:id', component: EditProductComponent },
+  { path: "profile", component: ProfileComponent, canActivate: [UserAuthGuard] },
+  { path: "cart", component: CartComponent, canActivate: [UserAuthGuard] },
+  { path: "admin/orders", component: OrderListComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin/create', component: CreateProductComponent, canActivate: [AdminAuthGuard] },
+  { path: 'admin/edit/:id', component: EditProductComponent, canActivate: [AdminAuthGuard] },
   { path: '**', component: ErrorComponent },
 ]
 
@@ -74,7 +77,7 @@ export function tokenGetter() {
     RegisterComponent,
     CartComponent,
     AboutComponent,
-  //  EditProfileComponent,
+    //  EditProfileComponent,
     FooterComponent,
     CartItemComponent,
     UserOrdersComponent,
@@ -105,7 +108,10 @@ export function tokenGetter() {
     OrderService,
     ProductService,
     UserService,
-    UploadService
+    UploadService,
+    AuthGuard,
+    AdminAuthGuard,
+    UserAuthGuard
   ],
   bootstrap: [AppComponent]
 })

@@ -49,8 +49,11 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.f.username.value, this.f.password.value)
       // .pipe(first())
       .subscribe(result => {
-        if (result)
+        if (result) {
+          // let returnUrl = this.activatedRoute.snapshot.queryParamMap.get('returnUrl');
+          // this.router.navigate([returnUrl || '/']);
           this.router.navigate([this.returnUrl]);
+        }
         else {
           console.log('failed login');
           this.invalidLogin = true;
