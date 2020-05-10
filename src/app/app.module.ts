@@ -38,7 +38,6 @@ import { ConfirmationDialogComponent } from './components/confirmation-dialog/co
 import { AuthGuard } from './services/auth-guard.service';
 import { AdminAuthGuard } from './services/admin-auth-guard.service';
 import { UserAuthGuard } from './services/user-auth-guard.service';
-import { ProductFilterPipe } from './components/product-filter.pipe';
 import { FormsModule } from '@angular/forms'
 
 
@@ -88,8 +87,7 @@ export function tokenGetter() {
     UserInfoComponent,
     ArrivalCarouselComponent,
     UploadComponent,
-    ConfirmationDialogComponent,
-    ProductFilterPipe
+    ConfirmationDialogComponent
   ],
   imports: [
     BrowserModule,
