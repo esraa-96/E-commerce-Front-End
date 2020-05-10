@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http'
 import { JwtHelperService } from '@auth0/angular-jwt'
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class AuthService {
   constructor(
     private client: HttpClient,
     private jwtHelper: JwtHelperService,
-    private router: Router) { }
+    private router: Router
+    ,private cart:CartService) { }
+    
 
   baseURL = 'http://localhost:3104/api/account';
 
@@ -35,7 +38,18 @@ export class AuthService {
               if (response.message) {
                 // debugger;
                 // We wanna store it in localStorage  
+
                 localStorage.setItem('access_token', response.message);
+                
+                //cart
+                this.cart.getUserCartByUserId(this.getUserId()).subscribe
+                ((response)=>{
+              
+                  localStorage.setItem('cart', response["orderId"]);
+                },(err)=>{
+                  console.log(err);
+                });
+
                 return true;
                 // this.authToken = `Bearer ${response.message}`;
               }
@@ -76,5 +90,7 @@ export class AuthService {
     if (currentUser)
       return currentUser.Role;
   }
+
+ 
 
 }

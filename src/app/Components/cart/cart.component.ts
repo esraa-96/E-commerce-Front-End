@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
+import { CartService } from 'src/app/services/cart.service';
+import { AuthService } from 'src/app/services/auth.service';
+import { OrderService } from 'src/app/services/order.service';
 
 @Component({
   selector: 'app-cart',
@@ -8,28 +11,65 @@ import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.
 })
 export class CartComponent implements OnInit {
 
-  constructor(private confirmationDialogService: ConfirmationDialogService) { }
+  cart: any;
+  loadPage: boolean = false;
+  constructor(private confirmationDialogService: ConfirmationDialogService,
+    private cartService: CartService,
+    private auth: AuthService,
+    private orderService : OrderService) { }
 
   ngOnInit(): void {
+    this.cartService.getUserCartByUserId(this.auth.getUserId()).
+      subscribe
+      ((response) => {
+        this.cart = response;
+        this.loadPage = true;
+      }, (error) => {
+        console.log(error);
+      });
   }
 
-  private submitOrder() {
+  private async submitOrder() {
     // Submit the order to database
-    console.log('order Submitted successfully');
-
+    for (let i = 0; i < this.cart.orderDetails.length; i++) {
+      // console.log(this.cart.orderDetails[i]);
+     await this.cartService.changeQuantity(this.cart.orderDetails[i]).toPromise()
+     .then((res)=>{
+      console.log('quantity changed successfully');
+     }).catch((err)=>{
+      console.log('quantity changed failed!');
+     });
+   
+    }
+    //submit
+   await this.orderService.submitOrder(this.cart.orderId).toPromise()
+   .then((res)=>{
+     console.log(res);
+    console.log('submit  successfully');
+   }).catch((err)=>{
+     console.log(err);
+    console.log('submit  failed!');
+   });
 
     // Handel getting the new cart
-
-
-    // Delete this after handeling the new cart
-    this.cart = { "orderDetails": [] };
+    this.cartService.getUserCartByUserId(this.auth.getUserId())
+      .subscribe
+      ((response) => {
+       
+        localStorage.setItem('cart', response["orderId"]);
+        this.cart = response;
+        this.loadPage = true;
+      }, (err) => {
+        console.log(err);
+      });
   }
+
 
   openConfirmationDialog() {
     this.confirmationDialogService.confirm('Confirm', 'Are you sure you want to submit your order?', 'Submit', 'Back')
       .then((confirmed) => {
         if (confirmed)
-          this.submitOrder()
+          this.submitOrder();
       })
       .catch(() => {
         //console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)')
@@ -53,111 +93,13 @@ export class CartComponent implements OnInit {
     }
     return total;
   }
-  cart: any = {
-    "orderId": 0,
-    "date": "2020-05-01T19:55:30.400Z",
-    "status": 0,
-    "totalPrice": 0,
-    "userId": "string",
-    "user": {
-      "id": "string",
-      "userName": "string",
-      "normalizedUserName": "string",
-      "email": "string",
-      "normalizedEmail": "string",
-      "emailConfirmed": true,
-      "passwordHash": "string",
-      "securityStamp": "string",
-      "concurrencyStamp": "string",
-      "phoneNumber": "string",
-      "phoneNumberConfirmed": true,
-      "twoFactorEnabled": true,
-      "lockoutEnd": "2020-05-01T19:55:30.400Z",
-      "lockoutEnabled": true,
-      "accessFailedCount": 0,
-      "age": 0,
-      "address": "string",
-      "gender": 0,
-      "profilePic": "string",
-      "fullName": {
-        "firstName": "string",
-        "lastName": "string"
-      },
-      "order": [
-        null
-      ]
-    },
-    "orderDetails": [
-      {
-        "productId": 0,
-        "orderId": 0,
-        "numberOfItems": 0,
-        "product": {
-          "productID": 0,
-          "productName": "string",
-          "unitPrice": 10,
-          "unitsInStock": 10,
-          "discount": .5,
-          "category": 0,
-          "description": "string",
-          "isDeleted": true,
-          "image": [
-            {
-              "productID": 0,
-              "imagePath": "string"
-            }
-          ],
-          "orderDetails": [
-            null
-          ]
-        }
-      }, {
-        "productId": 0,
-        "orderId": 0,
-        "numberOfItems": 0,
-        "product": {
-          "productID": 0,
-          "productName": "string",
-          "unitPrice": 20,
-          "unitsInStock": 5,
-          "discount": 0,
-          "category": 0,
-          "description": "string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string string ",
-          "isDeleted": true,
-          "image": [
-            {
-              "productID": 0,
-              "imagePath": "string"
-            }
-          ],
-          "orderDetails": [
-            null
-          ]
-        }
-      }, {
-        "productId": 0,
-        "orderId": 0,
-        "numberOfItems": 0,
-        "product": {
-          "productID": 0,
-          "productName": "string",
-          "unitPrice": 30,
-          "unitsInStock": 2,
-          "discount": 0,
-          "category": 0,
-          "description": "string",
-          "isDeleted": true,
-          "image": [
-            {
-              "productID": 0,
-              "imagePath": "string"
-            }
-          ],
-          "orderDetails": [
-            null
-          ]
-        }
-      }
-    ]
+
+
+  removeItemFromDetails(event)
+  {
+    console.log(event);
+    console.log("removeItemEvent");
+    // debugger;
+    this.cart.orderDetails = this.cart.orderDetails.filter(o=>o.productId != event.productId);
   }
 }

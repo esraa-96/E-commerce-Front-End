@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { ProductService } from 'src/app/services/product.service';
+import { CartService } from 'src/app/services/cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.service';
 
@@ -12,16 +13,56 @@ import { ConfirmationDialogService } from 'src/app/services/confirmation-dialog.
 export class ProductComponent implements OnInit {
   @Output() redirect: EventEmitter<any> = new EventEmitter();
 
-  constructor(private service:ProductService,private router: Router,private authorize:AuthService,  
-    private confirmationDialogService: ConfirmationDialogService) {}
+  constructor(private service: ProductService,
+    private router: Router,
+    private authorize: AuthService,
+    private confirmationDialogService: ConfirmationDialogService,
+    private cartService: CartService) { }
 
-  urlServer="http://localhost:3104/";
+  urlServer = "http://localhost:3104/";
 
-  toCart(id)
-  {
-    console.log(`user added item number ${id} to the cart`)
+  toCart(productId) {
+    //console.log(`user added item number ${productId} to the cart`)
+    let cartId = this.cartService.getCartId()
+    if (!cartId) {
+      this.cartService.getUserCartByUserId(this.authorize.getUserId())
+        .subscribe
+        ((response) => {
+
+          localStorage.setItem('cart', response["orderId"]);
+          this.addToCartByService(productId, response["orderId"]);
+
+          //
+        }, (err) => {
+          console.log(err);
+        });
+
+    }
+    else {
+      this.addToCartByService(productId, cartId);
+    }
+
     //this.router.navigate(['cart',id]);
-  }    
+  }
+
+
+  addToCartByService(productId, cartId) {
+    let OrderDetail = {
+      "productId": productId,
+      "orderId": cartId,
+      "numberOfItems": 1
+    };
+    this.cartService.addToCart(OrderDetail).subscribe
+      ((response) => {
+        console.log(response);
+        console.log("AddToCart Success");
+      }, (error) => {
+        console.log(error);
+        console.log("AddToCart Failed!");
+      })
+
+  }
+
 
   get admin() {
     if (this.authorize.getUserRole() == 'admin')
@@ -29,7 +70,7 @@ export class ProductComponent implements OnInit {
     else
       return false;
   }
-  
+
 
 
   ngOnInit(): void {

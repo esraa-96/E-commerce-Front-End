@@ -1,4 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output,EventEmitter } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+
 
 @Component({
   selector: 'app-cart-item',
@@ -7,11 +9,14 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class CartItemComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cartservice:CartService) { }
 
   showDesc: boolean = false;
+  isRemoved:boolean=false;
 
   @Input() item: any;
+  
+  @Output()removeItemEvent=new EventEmitter();
 
   ngOnInit(): void {
   }
@@ -30,6 +35,19 @@ export class CartItemComponent implements OnInit {
   }
   removeItem() {
     console.log('remove clicked!');
+    this.cartservice.removeFromCart(this.item).subscribe
+      (
+        (res)=>{
+          console.log("successfully");
+          this.isRemoved=true;
+          console.log(res);
+        this.removeItemEvent.emit(this.item);
+      },(err)=>{
+         console.log("failed!");
+         this.isRemoved=false;
+         console.log(err);
+      });
+    
   }
   toggleDescription() {
     this.showDesc = !this.showDesc;
