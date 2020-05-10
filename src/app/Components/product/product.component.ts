@@ -19,10 +19,14 @@ export class ProductComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private cartService: CartService) { }
 
+  available:boolean;  
+  clicked=0;
   urlServer = "http://localhost:3104/";
 
+  
+
   toCart(productId) {
-    //console.log(`user added item number ${productId} to the cart`)
+    this.clicked=1;
     let cartId = this.cartService.getCartId()
     if (!cartId) {
       this.cartService.getUserCartByUserId(this.authorize.getUserId())
@@ -31,18 +35,14 @@ export class ProductComponent implements OnInit {
 
           localStorage.setItem('cart', response["orderId"]);
           this.addToCartByService(productId, response["orderId"]);
-
-          //
         }, (err) => {
           console.log(err);
         });
-
     }
     else {
       this.addToCartByService(productId, cartId);
     }
 
-    //this.router.navigate(['cart',id]);
   }
 
 
@@ -71,9 +71,15 @@ export class ProductComponent implements OnInit {
       return false;
   }
 
-
-
+  avaialable()
+  {
+    if (this.prd.unitsInStock ==0)
+      return false;
+    else 
+      return true; 
+  }
   ngOnInit(): void {
+   
   }
 
   openConfirmationDialog(id) {
@@ -83,7 +89,7 @@ export class ProductComponent implements OnInit {
           this.delete(id);
       })
       .catch(() => {
-        //console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)')
+        //console.log('User dismissed the dialog
       });
   }
 

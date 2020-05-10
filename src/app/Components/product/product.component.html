@@ -1,4 +1,4 @@
-<div class="card" *ngIf="prd.isDeleted==false">
+<div class="card" *ngIf="prd.isDeleted==false && available">
   <div *ngIf="prd.image.length==0 else otherBlock">
   <img src="assets/def.jpg" class="card-img-top" alt="productImage">
   </div>
@@ -18,7 +18,10 @@
       <button class="btn btn-danger col-4 " (click)="openConfirmationDialog(prd.productID)">Delete</button> <br> <br>
     </div>
     <ng-template #falseBlock>
-        <button class="btn btn-primary mb-2" (click)="toCart(prd.productID)">Add to cart</button>
+        <button class="btn btn-primary mb-2" *ngIf="!clicked else addedBlock" (click)="toCart(prd.productID)">Add to cart</button>
+    </ng-template>
+    <ng-template #addedBlock>
+        <span class="text-success">Item added to cart sucessfully</span>
     </ng-template>
       <table class="table">
             <tr>
