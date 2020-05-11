@@ -8,13 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
 })
 export class FooterComponent implements OnInit {
 
-  constructor(private authorize:AuthService) { }
+  constructor(private authorize: AuthService) { }
 
-  get IsLoggedIn()
-  {
-    if (this.authorize.isLoggedIn)
+  get IsLoggedIn() {
+    if (this.authorize.isLoggedIn())
       return true;
-    else 
+    else
       return false;
   }
 

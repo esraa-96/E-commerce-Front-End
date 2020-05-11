@@ -1,50 +1,47 @@
 <hr>
 <footer class="page-footer font-small dark bg-light pt-4 mt-6" style="border-radius:10px ;">
 
-    <div class="container text-center text-md-left">
-  
-      <div class="row">
-  
-        <div class="col-md-4 mx-auto">
-  
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Shop Now</h5>
-          <p style="font-size: medium;font-family: Verdana, Geneva, Tahoma, sans-serif;">summer collection 2020 coming soon!</p>
-  
-        </div>
-  
-        <div class="col-md-2 mx-auto">
-  
-          <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Website Links</h5>
-  
-          <ul class="list-unstyled">
-            <li>
-              <a routerLink="admin/products/10">Our Products</a>
-            </li>
-            <li>
-              <a routerLink="login">LogIn</a>
-            </li>
-            <li>
-              <a routerLink="cart">Cart</a>
-            </li>
-            <li>
-              <a routerLink="profile">profile</a>
-            </li>
-          </ul>
-  
-        </div>  
-        
-  
+  <div class="container text-center text-md-left">
+
+    <div class="row">
+
+      <div class="col-md-4 mx-auto">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Shop Now</h5>
+        <p style="font-size: medium;font-family: Verdana, Geneva, Tahoma, sans-serif;">summer collection 2020 coming
+          soon!</p>
       </div>
-  
+
+      <div class="col-md-2 mx-auto">
+
+        <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Links</h5>
+
+        <ul class="list-unstyled">
+          <li>
+            <a routerLink="products/10">All Products</a>
+          </li>
+          <li *ngIf='IsLoggedIn'>
+            <a routerLink="profile">Profile</a>
+          </li>
+          <li *ngIf='IsLoggedIn'>
+            <a routerLink="cart">Cart</a>
+          </li>
+          <li *ngIf='!IsLoggedIn'>
+            <a routerLink="login">LogIn</a>
+          </li>
+        </ul>
+      </div>
     </div>
-  
-    <hr>
-    <ul class="list-unstyled list-inline text-center py-2">
-      <li class="list-inline-item">
-        <h5 class="mb-1" >Register for free</h5>
-      </li>
-      <li class="list-inline-item">
-        <a routerLink="register" class="btn btn-danger btn-rounded">Sign Up!</a>
-      </li>
-    </ul>
+  </div>
+
+  <hr>
+
+  <ul *ngIf='!IsLoggedIn' class="list-unstyled list-inline text-center py-2">
+    <li class="list-inline-item">
+      <h5 class="mb-1">Register for free</h5>
+    </li>
+    <li class="list-inline-item">
+      <a routerLink="register" class="btn btn-danger btn-rounded">Sign Up!</a>
+    </li>
+  </ul>
 </footer>

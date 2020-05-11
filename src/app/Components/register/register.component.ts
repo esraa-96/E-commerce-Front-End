@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, ValidationErrors, ValidatorFn, AbstractControl } from '@angular/forms';
 import { first } from 'rxjs/operators';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -27,7 +27,20 @@ export class RegisterComponent implements OnInit {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', Validators.required],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.compose([
+        // 1. Password Field is Required
+        Validators.required,
+        // 2. check whether the entered password has a number
+        RegisterComponent.patternValidator(/\d/, { hasNumber: true }),
+        // 3. check whether the entered password has upper case letter
+        RegisterComponent.patternValidator(/[A-Z]/, { hasCapitalCase: true }),
+        // 4. check whether the entered password has a lower-case letter
+        RegisterComponent.patternValidator(/[a-z]/, { hasSmallCase: true }),
+        // 5. check whether the entered password has a special character
+        RegisterComponent.patternValidator(/[ [!@#$%^&*()_+-=':"|[\]{}<>/?]/, { hasSpecialCharacters: true }),
+        // 6. Has a minimum length of 8 characters
+        Validators.minLength(8)
+      ])]],
       gender: [0, Validators.required],
       profilePhoto: [''],
       phoneNumber: [''],
@@ -62,6 +75,21 @@ export class RegisterComponent implements OnInit {
   }
   public uploadFinished = (event) => {
     this.form.controls.profilePhoto.setValue(event.dbPath);
+  }
+
+  static patternValidator(regex: RegExp, error: ValidationErrors): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      if (!control.value) {
+        // if control is empty return no error
+        return null;
+      }
+
+      // test the value of the control against the regexp supplied
+      const valid = regex.test(control.value);
+
+      // if true, return no error (no error), else return error passed in the second parameter
+      return valid ? null : error;
+    };
   }
 
 }

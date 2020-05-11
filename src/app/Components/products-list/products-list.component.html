@@ -2,24 +2,25 @@
     <div class="form-group ">
         <br>
         <div class="row">
-            <input type="text" class="form-control ml-2" placeholder="search products by name ..." (keyup)="inputChanged($event)">
-            <!-- <input type="text" class="form-control" placeholder="search products..."[(ngModel)]="searchTerm"> -->
+            <div class="col-9 align-self-center">
+                <input type="text" class="form-control ml-2" placeholder="search products by name ..."
+                    (keyup)="inputChanged($event)">
+            </div>
+            <div class="col-3">
+                <a class="btn btn-primary m-2 w-100" routerLink="../../admin/create" *ngIf="admin">Create</a>
+            </div>
         </div>
-        
     </div>
-    <div class="row">
-        <div class="col-4 offset-8">
-            <a class="btn btn-primary m-2 " routerLink="../../create" *ngIf="admin">Create</a>
-        </div>
 
-        <ng-container *ngIf="newList !=null else otherBlock " >
-            <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of newList" 
-            [prd]="eachPrd"> </app-product>
+    <div class="row">
+        <ng-container *ngIf="newList !=null else otherBlock ">
+            <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of newList" [prd]="eachPrd">
+            </app-product>
         </ng-container>
 
         <ng-template #otherBlock>
-            <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of products" 
-            [prd]="eachPrd"> </app-product>
+            <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of products" [prd]="eachPrd">
+            </app-product>
         </ng-template>
 
         <!-- <app-product class="col-md-6 col-lg-4 col-sm-12 mt-3" *ngFor="let eachPrd of products | productFilter : searchTerm" [prd]="eachPrd">

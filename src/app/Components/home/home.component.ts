@@ -9,16 +9,14 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private service:ProductService,private router:Router) 
-  {
+  constructor(private service: ProductService, private router: Router) {
 
   }
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
 
-  ShowCategory(id)
-  {
-    this.router.navigate(['admin/products',id]);
+  ShowCategory(id) {
+    this.router.navigate(['products', id]);
   }
-  
+
 }

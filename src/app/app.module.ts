@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: "about", component: AboutComponent },
   { path: "login", component: LoginComponent },
   { path: "register", component: RegisterComponent },
-  { path: "admin/products/:id", component: ProductsListComponent },
+  { path: "products/:id", component: ProductsListComponent },
   { path: "profile", component: ProfileComponent, canActivate: [UserAuthGuard] },
   { path: "cart", component: CartComponent, canActivate: [UserAuthGuard] },
   { path: "admin/orders", component: OrderListComponent, canActivate: [AdminAuthGuard] },

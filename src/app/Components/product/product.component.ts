@@ -19,14 +19,33 @@ export class ProductComponent implements OnInit {
     private confirmationDialogService: ConfirmationDialogService,
     private cartService: CartService) { }
 
-  available:boolean;  
-  clicked=0;
+
+  ngOnInit(): void {
+    if (this.prd.unitsInStock == 0)
+      this.inStock = false;
+    if (!this.authorize.isLoggedIn() || this.authorize.getUserRole() == "admin")
+      return;
+    this.cartService.getUserCartByUserId(this.authorize.getUserId())
+      .subscribe((resp) => {
+        console.log(resp['orderDetails']);
+        resp['orderDetails'].forEach(element => {
+          if (element['productId'] == this.prd.productID) {
+            this.isAdded = true;
+          }
+        });
+      },
+        (error) => { console.log(error) });
+
+  }
+
+  inStock: boolean = true;
   urlServer = "http://localhost:3104/";
 
-  
+  isAdded: boolean = false;
+
 
   toCart(productId) {
-    this.clicked=1;
+    this.isAdded = true;
     let cartId = this.cartService.getCartId()
     if (!cartId) {
       this.cartService.getUserCartByUserId(this.authorize.getUserId())
@@ -71,15 +90,11 @@ export class ProductComponent implements OnInit {
       return false;
   }
 
-  avaialable()
-  {
-    if (this.prd.unitsInStock ==0)
+  avaialable() {
+    if (this.prd.unitsInStock == 0)
       return false;
-    else 
-      return true; 
-  }
-  ngOnInit(): void {
-   
+    else
+      return true;
   }
 
   openConfirmationDialog(id) {
