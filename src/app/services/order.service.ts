@@ -6,7 +6,8 @@ import { HttpClient } from '@angular/common/http';
 })
 export class OrderService {
 
-  baseURL = 'http://localhost:3104/api/orders';
+  // baseURL = 'http://localhost:3104/api/orders';
+  baseURL = 'https://sdera.azurewebsites.net/api/orders';
   authToken: string;
   constructor(private client: HttpClient) { }
 
