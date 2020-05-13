@@ -16,6 +16,12 @@ export class FooterComponent implements OnInit {
     else
       return false;
   }
+  get IsAdmin() {
+    if (this.authorize.getUserRole() == 'admin')
+      return true;
+    else
+      return false;
+  }
 
   ngOnInit(): void {
   }

@@ -3,7 +3,7 @@
         <div id="trans">
             <h1>ERA</h1>
             <p>
-                Fashion Collection <br> 2019 (wonen - men -kids)
+                Fashion Collection <br> 2020 (Women - Men - Kids)
             </p>
         </div>
     </div>
@@ -15,7 +15,7 @@
         <div class="" id="loginUp">
 
             <div id="photo"></div>
-            <div class="input-group w-75 m-auto">
+            <!-- <div class="input-group w-75 m-auto">
 
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="inputGroupFileAddon01">Upload</span>
@@ -25,11 +25,11 @@
                         aria-describedby="inputGroupFileAddon01">
                     <label class="custom-file-label" for="inputGroupFile01">Image</label>
                 </div>
-            </div>
+            </div> -->
 
-            <app-uploadImage (onUploadFinished)="uploadFinished($event)"></app-uploadImage>
+            <!-- <app-uploadImage (onUploadFinished)="uploadFinished($event)"></app-uploadImage> -->
             <form [formGroup]="form" (ngSubmit)="onSubmit()">
-                <input type="hidden" formControlName="profilePhoto" class="form-control" />
+                <!-- <input type="hidden" formControlName="profilePhoto" class="form-control" /> -->
                 <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" formControlName="firstName" class="form-control"
@@ -72,12 +72,12 @@
                         <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div> -->
                     </div>
                 </div>
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <select formControlName="gender" class="form-control browser-default custom-select mb-4">
                         <option value="0">Male</option>
                         <option value="1">Female</option>
                     </select>
-                </div>
+                </div> -->
                 <div class="form-group">
                     <label for="phoneNumber">Mobile Number</label>
                     <input type="text" formControlName="phoneNumber" class="form-control"

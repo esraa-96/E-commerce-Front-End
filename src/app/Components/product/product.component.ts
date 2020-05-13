@@ -27,19 +27,19 @@ export class ProductComponent implements OnInit {
       return;
     this.cartService.getUserCartByUserId(this.authorize.getUserId())
       .subscribe((resp) => {
-        console.log(resp['orderDetails']);
         resp['orderDetails'].forEach(element => {
           if (element['productId'] == this.prd.productID) {
             this.isAdded = true;
           }
         });
       },
-        (error) => { console.log(error) });
+        (error) => { });
 
   }
 
   inStock: boolean = true;
-  urlServer = "http://localhost:3104/";
+  // urlServer = "http://localhost:3104/";
+  urlServer = 'https://sdera.azurewebsites.net/';
 
   isAdded: boolean = false;
 
@@ -55,7 +55,6 @@ export class ProductComponent implements OnInit {
           localStorage.setItem('cart', response["orderId"]);
           this.addToCartByService(productId, response["orderId"]);
         }, (err) => {
-          console.log(err);
         });
     }
     else {
@@ -73,11 +72,7 @@ export class ProductComponent implements OnInit {
     };
     this.cartService.addToCart(OrderDetail).subscribe
       ((response) => {
-        console.log(response);
-        console.log("AddToCart Success");
       }, (error) => {
-        console.log(error);
-        console.log("AddToCart Failed!");
       })
 
   }
@@ -88,6 +83,9 @@ export class ProductComponent implements OnInit {
       return true;
     else
       return false;
+  }
+  get isLoggedIn() {
+    return this.authorize.isLoggedIn();
   }
 
   avaialable() {
@@ -104,20 +102,17 @@ export class ProductComponent implements OnInit {
           this.delete(id);
       })
       .catch(() => {
-        //console.log('User dismissed the dialog
       });
   }
 
   GoToEdit(id) {
     this.router.navigate(['admin/edit', id]);
-    console.log(id);
   }
 
 
   delete(id) {
-    console.log(id);
     this.service.deleteProduct(id)
-      .subscribe((response) => { console.log(response) }, (err) => { console.log(err) });
+      .subscribe((response) => { }, (err) => { });
     this.prd.isDeleted = true;
     // window.location.reload();
   }

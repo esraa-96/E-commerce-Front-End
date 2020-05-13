@@ -5,16 +5,19 @@
         <p class="h4 mb-4" id="title"> Create New Product</p>
 
         <!-- Name -->
-        <label class="text-danger" *ngIf="f.productName.touched && f.productName.invalid">Please Enter Valid Name</label>
+        <label class="text-danger" *ngIf="f.productName.touched && f.productName.invalid">Please Enter Valid
+            Name</label>
         <input type="text" formControlName="productName" id="ProductTitle" class="form-control mb-4"
             placeholder="Product Name*">
 
         <!-- Price -->
         <label class="text-danger" *ngIf="f.unitPrice.touched && f.unitPrice.invalid">Please Enter Valid price</label>
-        <input type="number" formControlName="unitPrice" id="Price" class="form-control mb-4" placeholder="Price*" min="0">
+        <input type="number" formControlName="unitPrice" id="Price" class="form-control mb-4" placeholder="Price*"
+            min="0">
 
         <!-- quantity -->
-        <label class="text-danger" *ngIf="f.unitsInStock.touched && f.unitsInStock.invalid">Please Enter Valid quantity</label>
+        <label class="text-danger" *ngIf="f.unitsInStock.touched && f.unitsInStock.invalid">Please Enter Valid
+            quantity</label>
         <input type="number" formControlName="unitsInStock" id="Price" class="form-control mb-4" placeholder="quantity*"
             min="0">
 
@@ -39,13 +42,14 @@
 
 
         <!--image-->
-        <label  class="text-danger" *ngIf="!validImage">
+        <label class="text-danger" *ngIf="!validImage">
             Please Enter image(png - jpg or jpeg)</label>
         <div class="mb-4">
-            <label class="" for="img" id="label" >Product Image</label>
+            <label class="" for="img" id="label">Product Image</label>
             <div class="p-0">
-                <input type="file" #file placeholder="Choose file"  name="img" (change)="ImageUploader(file.files)" style="display:none;">
-                <button type="button" class="btn btn-info btn-block"  (click)="file.click()">Upload Image</button>
+                <input type="file" #file placeholder="Choose file" name="img" (change)="ImageUploader(file.files)"
+                    style="display:none;">
+                <button type="button" class="btn btn-info btn-block" (click)="file.click()">Upload Image</button>
             </div>
             <div class="col-md-3">
                 <span class="upload" *ngIf="progress > 0">
@@ -55,15 +59,6 @@
                     {{message}}
                 </span>
             </div>
-            <!-- margin-left: 14%;
-    border: 1px solid red;
-    width: %;
-    width: 70%; -->
-
-            <!-- <input type="file" class="custom-file-input" id="customFile" formControlName="image">
-            <label class="custom-file-label" for="customFile">{{uploadImage}}</label> -->
-            <!-- <input type="hidden"   class="custom-file-input" id="customFile" formControlName="image"> -->
-            <!-- <app-upload></app-upload> -->
         </div>
 
         <!-- Message -->

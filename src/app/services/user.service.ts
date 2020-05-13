@@ -5,14 +5,15 @@ import { HttpClient } from '@angular/common/http'
   providedIn: 'root'
 })
 export class UserService {
-   baseURL = 'http://localhost:3104/api/user';
-   
-  constructor(private userClient: HttpClient){}
+  // baseURL = 'http://localhost:3104/api/user';
+  baseURL = 'https://sdera.azurewebsites.net/api/user';
+
+  constructor(private userClient: HttpClient) { }
   getuserById(id) {
     return this.userClient.get(`${this.baseURL}/${id}`);
   }
- 
+
   edituser(id, user) {
-    return this.userClient.post(`${this.baseURL}ظEdit/${id}`, user);
+    return this.userClient.post(`${this.baseURL}Edit/${id}`, user);
   }
 }

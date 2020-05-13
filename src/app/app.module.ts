@@ -29,7 +29,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { AboutComponent } from './components/about/about.component';
 import { FooterComponent } from './components/footer/footer.component'
 import { CartItemComponent } from './components/cart/cart-item/cart-item.component';
-import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
+// import { UserOrdersComponent } from './components/profile/user-orders/user-orders.component';
 import { UserInfoComponent } from './components/profile/user-info/user-info.component'
 import { JwtModule } from "@auth0/angular-jwt";
 import { ArrivalCarouselComponent } from './Components/arrival-carousel/arrival-carousel.component';
@@ -83,7 +83,7 @@ export function tokenGetter() {
     //  EditProfileComponent,
     FooterComponent,
     CartItemComponent,
-    UserOrdersComponent,
+    // UserOrdersComponent,
     UserInfoComponent,
     ArrivalCarouselComponent,
     UploadComponent,

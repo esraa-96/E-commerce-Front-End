@@ -20,10 +20,13 @@
           <li>
             <a routerLink="products/10">All Products</a>
           </li>
-          <li *ngIf='IsLoggedIn'>
+          <li>
+            <a routerLink="about">About</a>
+          </li>
+          <li *ngIf='IsLoggedIn && !IsAdmin'>
             <a routerLink="profile">Profile</a>
           </li>
-          <li *ngIf='IsLoggedIn'>
+          <li *ngIf='IsLoggedIn && !IsAdmin'>
             <a routerLink="cart">Cart</a>
           </li>
           <li *ngIf='!IsLoggedIn'>

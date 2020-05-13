@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
         // 6. Has a minimum length of 8 characters
         Validators.minLength(8)
       ])]],
-      gender: [0, Validators.required],
+      // gender: [0, Validators.required],
       profilePhoto: [''],
       phoneNumber: [''],
       address: ['']

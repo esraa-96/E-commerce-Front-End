@@ -28,7 +28,6 @@ export class OrderComponent implements OnInit {
       .subscribe((response) => {
         this.order.status = 2;
       }, (err) => {
-        console.log(err);
       });
   }
   rejectOrder(id) {
@@ -36,7 +35,6 @@ export class OrderComponent implements OnInit {
       .subscribe((response) => {
         this.order.status = 3;
       }, (err) => {
-        console.log(err);
       });
   }
 
@@ -44,10 +42,8 @@ export class OrderComponent implements OnInit {
   cancelOrder(id) {
     this.orderProvider.cancelOrder(id)
       .subscribe(response => {
-        console.log(response);
         this.order.status = 4;
       }, err => {
-        console.log(err);
       });
   }
 }

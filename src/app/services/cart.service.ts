@@ -7,34 +7,33 @@ import { AuthService } from './auth.service';
 })
 export class CartService {
 
-  baseURL = 'http://localhost:3104/api/Cart';
+  // baseURL = 'http://localhost:3104/api/Cart';
+  baseURL = 'https://sdera.azurewebsites.net/api/Cart';
 
   constructor(private CartClient: HttpClient) { }
- 
+
 
 
   addToCart(OrderDetails) {
     return this.CartClient.post(`${this.baseURL}`, OrderDetails);
   }
 
-  getUserCartByUserId(userId){
+  getUserCartByUserId(userId) {
     return this.CartClient.get(`${this.baseURL}/${userId}`);
   }
 
-  getCartId(){
+  getCartId() {
     return localStorage.getItem("cart");
   }
 
-  changeQuantity(OrderDetail)
-  {
-    return this.CartClient.put(`${this.baseURL}`,OrderDetail);
+  changeQuantity(OrderDetail) {
+    return this.CartClient.put(`${this.baseURL}`, OrderDetail);
   }
 
-  removeFromCart(OrderDetail)
-  {
-    return this.CartClient.put(`${this.baseURL}/remove`,OrderDetail);
+  removeFromCart(OrderDetail) {
+    return this.CartClient.put(`${this.baseURL}/remove`, OrderDetail);
   }
-  
+
 
 
 }

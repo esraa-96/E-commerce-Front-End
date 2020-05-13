@@ -6,9 +6,12 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 })
 export class UploadService {
 
-constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-public uploadFile = (files) => {
+  // baseURL = 'http://localhost:3104/api/upload';
+  baseURL = 'https://sdera.azurewebsites.net/api/upload';
+
+  public uploadFile = (files) => {
     if (files.length === 0) {
       return;
     }
@@ -17,7 +20,7 @@ public uploadFile = (files) => {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-   return this.http.post('http://localhost:3104/api/upload', formData, { reportProgress: true, observe: 'events' });
-    
+    return this.http.post(this.baseURL, formData, { reportProgress: true, observe: 'events' });
+
   }
 }

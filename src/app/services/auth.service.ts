@@ -15,10 +15,11 @@ export class AuthService {
     private client: HttpClient,
     private jwtHelper: JwtHelperService,
     private router: Router
-    ,private cart:CartService) { }
-    
+    , private cart: CartService) { }
 
-  baseURL = 'http://localhost:3104/api/account';
+
+  // baseURL = 'http://localhost:3104/api/account';
+  baseURL = 'https://sdera.azurewebsites.net/api/account';
 
   login(email, pw) {
     const user = {
@@ -31,30 +32,26 @@ export class AuthService {
           (response: any) => {
             if (response) {
               if (response.status == 400) {
-                // debugger;
                 return false;
               }
 
               if (response.message) {
-                // debugger;
                 // We wanna store it in localStorage  
 
                 localStorage.setItem('access_token', response.message);
-                
+
                 //cart
                 this.cart.getUserCartByUserId(this.getUserId()).subscribe
-                ((response)=>{
-              
-                  localStorage.setItem('cart', response["orderId"]);
-                },(err)=>{
-                  console.log(err);
-                });
+                  ((response) => {
+
+                    localStorage.setItem('cart', response["orderId"]);
+                  }, (err) => {
+                  });
 
                 return true;
                 // this.authToken = `Bearer ${response.message}`;
               }
             }
-            // debugger;
             return false;
           }));
   }
@@ -65,6 +62,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('access_token');
+    localStorage.removeItem('cart');
     this.router.navigate(['/']);
   }
 
@@ -91,6 +89,6 @@ export class AuthService {
       return currentUser.Role;
   }
 
- 
+
 
 }

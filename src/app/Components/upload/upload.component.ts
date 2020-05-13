@@ -8,13 +8,16 @@ import { HttpEventType, HttpClient } from '@angular/common/http';
 })
 export class UploadComponent implements OnInit {
   public progress: number;
-  public message: string="No file";
+  public message: string = "No file";
   @Output() public onUploadFinished = new EventEmitter();
 
   constructor(private http: HttpClient) { }
 
   ngOnInit() {
   }
+
+  // baseURL = 'http://localhost:3104/api/upload';
+  baseURL = 'https://sdera.azurewebsites.net/api/upload';
 
   public uploadFile = (files) => {
     if (files.length === 0) {
@@ -25,7 +28,7 @@ export class UploadComponent implements OnInit {
     const formData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
 
-    this.http.post('http://localhost:3104/api/upload', formData, { reportProgress: true, observe: 'events' })
+    this.http.post(this.baseURL, formData, { reportProgress: true, observe: 'events' })
       .subscribe(event => {
         if (event.type === HttpEventType.UploadProgress)
           this.progress = Math.round(100 * event.loaded / event.total);

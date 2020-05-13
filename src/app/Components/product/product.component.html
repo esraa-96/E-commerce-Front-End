@@ -8,7 +8,7 @@
   </ng-template>
   <div class="card-body">
     <h5 class="card-title">{{prd.productName}}</h5>
-    <p class="card-text" *ngIf="prd.description !='' ; else elseBlock"> {{prd.description}}</p>
+    <p class="card-text text-muted" *ngIf="prd.description !='' ; else elseBlock"> {{prd.description}}</p>
     <ng-template #elseBlock>
       <p>No description</p>
     </ng-template>
@@ -19,15 +19,18 @@
       <button class="btn btn-danger col-4 " (click)="openConfirmationDialog(prd.productID)">Delete</button> <br> <br>
     </div>
     <ng-template #falseBlock>
-      <div *ngIf='inStock'>
-        <button class="btn btn-primary mb-2" *ngIf="!isAdded else addedBlock" (click)="toCart(prd.productID)">Add to
-          cart</button>
-        <ng-template #addedBlock>
-          <button class="btn btn-primary mb-2" disabled>In Cart</button>
-        </ng-template>
-      </div>
-      <div *ngIf='!inStock'>
-        <button class="btn btn-primary mb-2" disabled>Out of Stock</button>
+      <div *ngIf='isLoggedIn'>
+
+        <div *ngIf='inStock'>
+          <button class="btn btn-primary mb-2" *ngIf="!isAdded else addedBlock" (click)="toCart(prd.productID)">Add to
+            cart</button>
+          <ng-template #addedBlock>
+            <button class="btn btn-primary mb-2" disabled>In Cart</button>
+          </ng-template>
+        </div>
+        <div *ngIf='!inStock'>
+          <button class="btn btn-primary mb-2" disabled>Out of Stock</button>
+        </div>
       </div>
     </ng-template>
     <table class="table">
@@ -35,7 +38,7 @@
         <th scope="col">Price</th>
         <td scope="col">{{prd.unitPrice}}</td>
       </tr>
-      <tr>
+      <tr *ngIf='admin'>
         <th scope="row">Quantity</th>
         <td>{{prd.unitsInStock}}</td>
       </tr>

@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
 
   ShowCategory(id) {
-    this.router.navigate(['products', id]);
+    this.router.navigate(['products', id]).then((success) => { }).catch((err) => { });
   }
 
 }

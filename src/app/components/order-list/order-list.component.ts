@@ -33,17 +33,15 @@ export class OrderListComponent implements OnInit {
             this.orderList = response;
           },
           (err) => {
-            console.log(err);
           });
     }
-   else if (this.authProvider.getUserRole() == "user") {
+    else if (this.authProvider.getUserRole() == "user") {
       this.orderProvider.getOrders(this.authProvider.getUserId())
         .subscribe(
           (response) => {
             this.orderList = response;
           },
           (err) => {
-            console.log(err);
           });
     }
     // }, 200);

@@ -31,10 +31,8 @@ export class ProductsListComponent implements OnInit {
     this.service.getProductByName(e.target.value).subscribe(
       (response) => {
         this.newList = response;
-        console.log(response);
       },
       (err) => {
-        console.log(err);
       });
   }
 
@@ -42,67 +40,27 @@ export class ProductsListComponent implements OnInit {
 
   ngOnInit(): void {
 
-    if (this.prdCategory == 10) {
-      console.log(`prd cat ${this.prdCategory}`)
+    if (this.prdCategory >= 0 && this.prdCategory < 3) {
+      if (!this.authorize.isLoggedIn())
+        this.router.navigate(['login']);
+      else
+        this.service.getProductByCategory(this.prdCategory)
+          .subscribe(
+            (response) => {
+              this.products = response;
+            },
+            (err) => {
+            });
+    }
+    else {
       this.service.getAllProducts()
         .subscribe(
           (response: any) => {
             this.products = response;
           },
           (err) => {
-            console.log(err);
           });
-    }
-    else if (this.prdCategory == 0) {
-      console.log(`prd cat ${this.prdCategory}`)
-      this.service.getProductByCategory(0)
-        .subscribe(
-          (response) => {
-            this.products = response;
-            console.log(response);
-          },
-          (err) => {
-            console.log(err);
-          });
-    }
-    else if (this.prdCategory == 1) {
-      console.log(`prd cat ${this.prdCategory}`)
-      this.service.getProductByCategory(1)
-        .subscribe(
-          (response) => {
-            this.products = response;
-            console.log(response);
-          },
-          (err) => {
-            console.log(err);
-          });
-    }
-    else if (this.prdCategory == 2) {
-      console.log(`prd cat ${this.prdCategory}`)
-      this.service.getProductByCategory(2)
-        .subscribe(
-          (response) => {
-            this.products = response;
-            console.log(response);
-          },
-          (err) => {
-            console.log(err);
-          });
-    }
-    else {
-      this.router.navigate['**']
     }
   }
-
-  // prd = {
-  //   "productID": 1,
-  //   "productName": 'erap',
-  //   "unitPrice": 10,
-  //   "unitsInStock": 12,
-  //   "discount": 23,
-  //   "category": 1,
-  //   "description": "jjj",
-  //   "isDeleted": false,
-  // }
 
 }

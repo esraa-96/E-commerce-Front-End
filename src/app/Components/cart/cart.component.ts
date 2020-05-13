@@ -16,7 +16,7 @@ export class CartComponent implements OnInit {
   constructor(private confirmationDialogService: ConfirmationDialogService,
     private cartService: CartService,
     private auth: AuthService,
-    private orderService : OrderService) { }
+    private orderService: OrderService) { }
 
   ngOnInit(): void {
     this.cartService.getUserCartByUserId(this.auth.getUserId()).
@@ -25,42 +25,33 @@ export class CartComponent implements OnInit {
         this.cart = response;
         this.loadPage = true;
       }, (error) => {
-        console.log(error);
       });
   }
 
   private async submitOrder() {
     // Submit the order to database
     for (let i = 0; i < this.cart.orderDetails.length; i++) {
-      // console.log(this.cart.orderDetails[i]);
-     await this.cartService.changeQuantity(this.cart.orderDetails[i]).toPromise()
-     .then((res)=>{
-      console.log('quantity changed successfully');
-     }).catch((err)=>{
-      console.log('quantity changed failed!');
-     });
-   
+      await this.cartService.changeQuantity(this.cart.orderDetails[i]).toPromise()
+        .then((res) => {
+        }).catch((err) => {
+        });
+
     }
     //submit
-   await this.orderService.submitOrder(this.cart.orderId).toPromise()
-   .then((res)=>{
-     console.log(res);
-    console.log('submit  successfully');
-   }).catch((err)=>{
-     console.log(err);
-    console.log('submit  failed!');
-   });
+    await this.orderService.submitOrder(this.cart.orderId).toPromise()
+      .then((res) => {
+      }).catch((err) => {
+      });
 
     // Handel getting the new cart
     this.cartService.getUserCartByUserId(this.auth.getUserId())
       .subscribe
       ((response) => {
-       
+
         localStorage.setItem('cart', response["orderId"]);
         this.cart = response;
         this.loadPage = true;
       }, (err) => {
-        console.log(err);
       });
   }
 
@@ -72,7 +63,6 @@ export class CartComponent implements OnInit {
           this.submitOrder();
       })
       .catch(() => {
-        //console.log('User dismissed the dialog (e.g., by using ESC, clicking the cross icon, or clicking outside the dialog)')
       });
   }
 
@@ -95,11 +85,7 @@ export class CartComponent implements OnInit {
   }
 
 
-  removeItemFromDetails(event)
-  {
-    console.log(event);
-    console.log("removeItemEvent");
-    // debugger;
-    this.cart.orderDetails = this.cart.orderDetails.filter(o=>o.productId != event.productId);
+  removeItemFromDetails(event) {
+    this.cart.orderDetails = this.cart.orderDetails.filter(o => o.productId != event.productId);
   }
 }

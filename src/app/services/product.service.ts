@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient ,HttpParams} from '@angular/common/http'
+import { HttpClient, HttpParams } from '@angular/common/http'
 
 @Injectable({
   providedIn: 'root'
@@ -7,9 +7,10 @@ import { HttpClient ,HttpParams} from '@angular/common/http'
 export class ProductService {
 
   constructor(private ProductClient: HttpClient) { }
-  baseURL = 'http://localhost:3104/api/products';
+  // baseURL = 'http://localhost:3104/api/products';
+  baseURL = 'https://sdera.azurewebsites.net/api/products';
   getAllProducts() {
-    return this.ProductClient.get(this.baseURL); 
+    return this.ProductClient.get(this.baseURL);
   }
   getProductById(id) {
     return this.ProductClient.get(`${this.baseURL}/${id}`);
@@ -34,14 +35,13 @@ export class ProductService {
   }
 
   addImage(image) {
-    //debugger;
-    return this.ProductClient.put(`${this.baseURL}/image`,image);
+    return this.ProductClient.put(`${this.baseURL}/image`, image);
   }
 
   deleteImage(image) {
-    // debugger;
     // let httpParams = new HttpParams().set('productID', image["productID"]);
     //   httpParams.set('imagePath', image["imagePath"]);
     // let option={params:image}
-    return this.ProductClient.post(`${this.baseURL}/image`, image)}
+    return this.ProductClient.post(`${this.baseURL}/image`, image)
+  }
 }

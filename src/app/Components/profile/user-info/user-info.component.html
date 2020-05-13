@@ -1,37 +1,42 @@
 <div id="info">
         <div id="image">
-                 <img src="assets/women.jpg" id="img" class="w-75 h-auto"> 
+                <img src="assets/women.jpg" id="img" class="w-75 h-auto">
 
         </div>
         <form class="text-center p-5" [formGroup]="createFrom">
                 <div *ngIf="canChange; else elseBlock" id="inputdiv">
-                        <input  type="text" value="user Name" class=" text-center" class="inputName">
+
+                        <!-- <input type="text" [value]="firstNameStatus" class=" text-center" class="inputName">
+                        <input type="text" [value]="user.lastName" class=" text-center" class="inputName"> -->
                 </div>
                 <ng-template #elseBlock>
-                        <p class="userName">{{firstName}}</p>
+                        <p class="userName">{{user.firstName}} {{user.lastName}}</p>
                 </ng-template>
 
 
                 <div *ngIf="canChange; else elseEmail" class="inputdiv">
-                        <input  type="email" value="userName@gamil.com" class=" text-center" class="inputName">
+                        <input type="email" [value]=user.email class=" text-center" class="inputName">
                 </div>
                 <ng-template #elseEmail>
-                        <p class="userOther">userName@gamil.com</p>
+                        <p class="userOther">{{user.email}}</p>
                 </ng-template>
 
 
-                <div *ngIf="canChange; else elseGender" class="inputdiv">
-                      <select class="inputName">
-                              <option value="male">Male</option>
-                              <option value="female">Female</option>
-                      </select>
+                <!-- <div *ngIf="canChange; else elseGender" class="inputdiv">
+                        <select class="inputName">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                        </select>
                 </div>
                 <ng-template #elseGender>
-                        <p class="userOther">Male</p>
+                        <p *ngIf="user.gender == 0" class="userOther">Male</p>
+                        <p *ngIf="user.gender == 1" class="userOther">Female</p>
                 </ng-template>
 
-                <input type="button" *ngIf="!canChange" class=" btn btn-primary bt" value="Edit">
-                <input type="button" *ngIf="canChange" class=" btn btn-primary bt" value="Save change">
+                <input type="button" *ngIf="!canChange" class=" btn btn-primary bt" value="Edit" (click)="enableEdit()">
+                <input type="button" *ngIf="canChange" class=" btn btn-primary bt" value="Save changes"
+                        (click)="updateUser()">
+                <input type="button" *ngIf="canChange" class="btn btn-danger" value="cancel" (click)="disableEdit()"> -->
 
         </form>
 

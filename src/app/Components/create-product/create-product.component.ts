@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder} from '@angular/forms';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ValidatorFn, AbstractControl } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -22,19 +22,19 @@ export class CreateProductComponent implements OnInit {
   product;
   loading;
   productID;
-  fileImage=null;
-  validEx=["image/png","image/jpeg","image/gif"];
-  validImage=false;
+  fileImage = null;
+  validEx = ["image/png", "image/jpeg", "image/gif"];
+  validImage = false;
   // constructor(private notifyService : NotificationService) { }
 
   //ctor
-  constructor(private service: ProductService,private modalService: NgbModal, private upload: UploadService) {
+  constructor(private service: ProductService, private modalService: NgbModal, private upload: UploadService) {
   }
   ngOnInit(): void { }
 
   //Validation
 
-  createFrom =new FormGroup({
+  createFrom = new FormGroup({
     productName: new FormControl('', [Validators.required, Validators.maxLength(30)]),
     unitPrice: new FormControl('', [Validators.min(0), Validators.required]),
     photo: new FormControl(''),
@@ -45,18 +45,17 @@ export class CreateProductComponent implements OnInit {
 
   });
 
-  
+
   //methods
 
- ValidateImage(imageURl){
-      if(imageURl&&this.validEx.includes(imageURl[0]["type"]))
-      {
-        this.validImage=true;
-        return true;
-      }
-      this.validImage=false;
-      return false;
-    
+  ValidateImage(imageURl) {
+    if (imageURl && this.validEx.includes(imageURl[0]["type"])) {
+      this.validImage = true;
+      return true;
+    }
+    this.validImage = false;
+    return false;
+
   }
 
   get f() { return this.createFrom.controls; }
@@ -69,98 +68,84 @@ export class CreateProductComponent implements OnInit {
 
 
   ImageUploader(files) {
-   if( this.ValidateImage(files))
-   {
-    this.fileImage=files;
-   }
-   
-  }
-
- public SaveImage(){
-   if(this.fileImage==null)return;
-    this.upload.uploadFile(this.fileImage).subscribe
-    (event => {
-      if (event.type === HttpEventType.UploadProgress)
-        this.progress = Math.round(100 * event.loaded / event.total);
-      else if (event.type === HttpEventType.Response) {
-        this.message = 'Upload success.';
-        debugger;
-        let body = event.body;
-        this.f.photo.setValue(body["dbPath"])
-        
-        console.log(this.f.photo.value);
-        //this.onUploadFinished.emit(event.body);
-      }
-    },
-    error=>{
-      this.fileImage=null;
-
+    if (this.ValidateImage(files)) {
+      this.fileImage = files;
     }
-    )
-    
-    
-    ;
+
   }
 
-  public Add(content) {
-   debugger;
-    //for button
-    // console.log(this.f);
+  public async SaveImage() {
+    if (this.fileImage == null) return;
+    await this.upload.uploadFile(this.fileImage).toPromise().then
+      ((event) => {
+        if (event.type === HttpEventType.UploadProgress)
+          this.progress = Math.round(100 * event.loaded / event.total);
+        else if (event.type === HttpEventType.Response) {
+          this.message = 'Upload success.';
+          let body = event.body;
+          this.f.photo.setValue(body["dbPath"])
+
+        }
+      }).catch(
+        error => {
+          this.fileImage = null;
+        }
+      );
+  }
+
+  public async Add(content) {
+    debugger;
     if (this.createFrom.invalid || !this.validImage) {
       this.afterAdd = "Please Enter Valid data!";
       this.open(content);
-      this.loading=false;
+      this.loading = false;
       return;
 
     }
-   //if success
+    //if success
     this.loading = true;
-    console.log(this.createFrom.value);
 
     //saveImage
-    if(!this.fileImage)return;
-    this.SaveImage();
-    if(!this.fileImage)return;
+    if (!this.fileImage) return;
+    await this.SaveImage();
+    if (!this.fileImage) return;
     this.createProduct(content);
-    
+
 
   }
 
 
 
-  createProduct(content){
-    this.f.discount.setValue(this.f.discount.value/100);
+  createProduct(content) {
+    this.f.discount.setValue(this.f.discount.value / 100);
     this.service.createProduct(this.createFrom.value)
-    .toPromise().then((Response)=>{
-     
-      console.log(Response["productID"]);
-     //add image
-     this.addImageToProduct(Response).toPromise()
-     .then((Response)=>{
-      this.afterAdd = "successfull !";
-      this.open(content);
-      this.loading = false;
-     }).catch((error=>{
-      console.log(error);
-      this.afterAdd = "Image  error !";
-      this.open(content);
-      this.loading = false;
-     }))
-    }).catch((error)=>{
-      console.log(error);
-      this.afterAdd = "Sever error !";
-      this.open(content);
-      this.loading = false;
-    });
+      .toPromise().then((Response) => {
+
+        //add image
+        this.addImageToProduct(Response).toPromise()
+          .then((Response) => {
+            this.afterAdd = "successfull !";
+            this.open(content);
+            this.loading = false;
+          }).catch((error => {
+            this.afterAdd = "Image  error !";
+            this.open(content);
+            this.loading = false;
+          }))
+      }).catch((error) => {
+        this.afterAdd = "Sever error !";
+        this.open(content);
+        this.loading = false;
+      });
   }
 
 
-  addImageToProduct(Response){
-    let PrdImage={
+  addImageToProduct(Response) {
+    let PrdImage = {
       "productID": Response["productID"],
       "imagePath": this.f.photo.value
 
-     }
+    }
 
     return this.service.addImage(PrdImage);
 
@@ -237,7 +222,7 @@ export class CreateProductComponent implements OnInit {
   // }
 
 
-  
+
   // imageValidator(): ValidatorFn {
 
   //   return (control: AbstractControl): { [key: string]: any } | null => {

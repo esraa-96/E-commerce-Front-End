@@ -11,42 +11,67 @@ import { UserService } from "src/app/services/user.service";
 })
 export class UserInfoComponent implements OnInit {
 
-  canChange:boolean=false;
-  id:String;
-  user:{"firstName":""};
-  firstName=" ";
-  
-  
+  canChange: boolean = false;
+  id: String;
+
+  user = {
+    address: "",
+    age: 0,
+    email: "",
+    firstName: "",
+    gender: 0,
+    lastName: "",
+    phoneNumber: "",
+    profilePhoto: ""
+  };
+  updatedUser = {
+    address: "",
+    age: 0,
+    email: "",
+    firstName: "",
+    gender: 0,
+    lastName: "",
+    phoneNumber: "",
+    profilePhoto: ""
+  };
+
+  rahaf = 'hello';
+
 
   createFrom = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-    price: new FormControl('', [Validators.min(0), Validators.required]),
-    });
+    firstNameStatus: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    lastName: new FormControl('', [Validators.required, Validators.maxLength(20)]),
+    email: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+  });
 
-  constructor(private userService:UserService,private auth:AuthService) {
-    
+  constructor(private userService: UserService, private auth: AuthService) {
+
     // auth.login("Eman@example.com","Eman123@");
-   }
-
-  ngOnInit() : void {
- 
-   this.id= this.auth.getUserId();
-   if(this.id){
-      this.getUser();
-      console.log("after");
-   }
-
-    
   }
 
-async getUser(){
-   await this.userService.getuserById(this.id).toPromise().then(
-      (Response)=>{console.log(Response["user"])
-      this.user=Response["user"];
-      this.firstName=this.user["firstName"];
-       
-    }).catch((err)=>console.log(err));
-      console.log("before");
+  ngOnInit(): void {
+
+    this.userService.getuserById(this.auth.getUserId()).subscribe(
+      (resp: any) => {
+        this.user = resp.user;
+      },
+      (err) => { }
+    )
   }
 
+  enableEdit() {
+    this.canChange = true;
+    this.updatedUser = { ...this.user };
+  }
+
+  disableEdit() {
+    this.canChange = false;
+  }
+
+  updateFirstName(e) {
+  }
+  updateUser() {
+
+    this.canChange = false;
+  }
 }

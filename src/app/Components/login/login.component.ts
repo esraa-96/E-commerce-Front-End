@@ -55,14 +55,11 @@ export class LoginComponent implements OnInit {
           this.router.navigate([this.returnUrl]);
         }
         else {
-          console.log('failed login');
           this.invalidLogin = true;
           this.loading = false;
         }
       },
         err => {
-          console.log(err);
-          console.log('failed login222222');
           this.invalidLogin = true;
           this.loading = false;
         });
