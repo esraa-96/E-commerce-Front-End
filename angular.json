@@ -22,8 +22,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets/logo.png",
-              "src/assets",
-              "src/web.config"
+              "src/assets"
             ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
