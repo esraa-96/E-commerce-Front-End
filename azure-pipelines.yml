@@ -17,8 +17,8 @@ steps:
 
 - script: |
     npm install -g @angular/cli
-    npm install
     ng add @azure/ng-deploy
+    npm install
     ng build --prod
   displayName: 'npm install and build'
   
